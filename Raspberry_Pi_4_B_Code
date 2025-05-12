@@ -1,0 +1,956 @@
+import RPi.GPIO as GPIO
+import time
+import threading
+import logging
+import requests
+import socket
+from threading import Thread
+import json
+from RPLCD.i2c import CharLCD
+import sys
+import tty
+import termios
+import traceback
+from flask import Flask, request, jsonify
+import uuid
+
+# Setup logging
+logging.basicConfig(
+    filename='button_log.log',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# GPIO Pin Configuration
+LED_DOWNTIME = 26
+LED_MAINTENANCE = 20
+LED_BREAK = 16  # Changed from LED_EMERGENCY
+LED_DOWNTIME_ALERT = 7
+LED_CANCEL = 13
+LED_SYSTEM_RESET = 17  # New LED for system reset
+
+BUTTON_CHANGING_MATERIAL = 19
+BUTTON_MAINTENANCE = 11
+BUTTON_BREAK = 12  # Changed from BUTTON_EMERGENCY
+BUTTON_CANCEL = 6
+SENSOR_OBSTACLE = 1
+BUTTON_SYSTEM_RESET = 27  # New button for system reset
+
+RELAY_POWER = 22
+BUTTON_POWER_CUT = 8
+
+# Main Flask app API base URL
+MAIN_API_BASE_URL = "http://10.110.30.15:1250/api"
+
+# Global state
+TEAM_NAME = None
+last_sensor_trigger = time.time()
+downtime_triggered = False
+selected_led = None
+is_first_run = True
+event_start_time = None
+awaiting_user_id = False
+start_user_id = None
+start_comment = None
+end_comment = None
+sensor_alert_active = False
+lcd = None
+power_on = True
+maintenance_arrival_time = None
+maintenance_arrival_user_id = None
+maintenance_state = None
+current_status = "working"  # Track machine status
+maintenance_option = None  # Store the first list selection
+material_change_start_time = None
+material_change_active = False
+
+# Flask app for Raspberry Pi
+app = Flask(__name__)
+
+def initialize_lcd():
+    global lcd
+    for attempt in range(3):
+        try:
+            lcd = CharLCD(
+                i2c_expander='PCF8574',
+                address=0x27,
+                port=1,
+                cols=20,
+                rows=4,
+                dotsize=8,
+                auto_linebreaks=False
+            )
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("Initializing...")
+            logger.info(f"LCD initialized successfully on attempt {attempt + 1}")
+            time.sleep(0.5)
+            return True
+        except Exception as e:
+            logger.error(f"LCD init attempt {attempt + 1} failed: {e}\n{traceback.format_exc()}")
+            time.sleep(1)
+    logger.error("Failed to initialize LCD after 3 attempts. Using console output.")
+    print("Warning: LCD initialization failed. Falling back to console output.")
+    lcd = None
+    return False
+
+def get_ip_address():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip_address = s.getsockname()[0]
+        s.close()
+        logger.info(f"Retrieved IP address: {ip_address}")
+        return ip_address
+    except Exception as e:
+        logger.error(f"Error getting IP address: {e}")
+        return None
+
+def fetch_machine_name(ip_address):
+    try:
+        url = f"{MAIN_API_BASE_URL}/get_machine_name"
+        data = {"ip_address": ip_address}
+        response = requests.post(url, json=data, timeout=5)
+        if response.status_code == 200:
+            machine_name = response.json().get("machine_name")
+            logger.info(f"Retrieved machine name: {machine_name} for IP: {ip_address}")
+            return machine_name
+        else:
+            logger.warning(f"Failed to fetch machine name: {response.status_code} - {response.text}")
+            return None
+    except Exception as e:
+        logger.error(f"Error fetching machine name from {url}: {e}")
+        return None
+
+def setup_gpio():
+    try:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+        
+        GPIO.setup(LED_DOWNTIME, GPIO.OUT)
+        GPIO.setup(LED_MAINTENANCE, GPIO.OUT)
+        GPIO.setup(LED_BREAK, GPIO.OUT)
+        GPIO.setup(LED_DOWNTIME_ALERT, GPIO.OUT)
+        GPIO.setup(LED_CANCEL, GPIO.OUT)
+        GPIO.setup(LED_SYSTEM_RESET, GPIO.OUT)  # New LED setup
+        
+        GPIO.setup(BUTTON_CHANGING_MATERIAL, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(BUTTON_MAINTENANCE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(BUTTON_BREAK, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(BUTTON_CANCEL, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(SENSOR_OBSTACLE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(BUTTON_SYSTEM_RESET, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # New button setup
+        
+        GPIO.setup(RELAY_POWER, GPIO.OUT)
+        GPIO.setup(BUTTON_POWER_CUT, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        
+        GPIO.output(RELAY_POWER, GPIO.LOW)
+        logger.info("Relay power set to ON (machine powered)")
+        
+        GPIO.output(LED_DOWNTIME_ALERT, GPIO.HIGH)
+        
+        print("Turning on all LEDs (except downtime alert) for 2 seconds...")
+        GPIO.output(LED_DOWNTIME, GPIO.HIGH)
+        GPIO.output(LED_MAINTENANCE, GPIO.HIGH)
+        GPIO.output(LED_BREAK, GPIO.HIGH)
+        GPIO.output(LED_CANCEL, GPIO.HIGH)
+        GPIO.output(LED_SYSTEM_RESET, GPIO.HIGH)
+        time.sleep(2)
+        GPIO.output(LED_DOWNTIME, GPIO.LOW)
+        GPIO.output(LED_MAINTENANCE, GPIO.LOW)
+        GPIO.output(LED_BREAK, GPIO.LOW)
+        GPIO.output(LED_CANCEL, GPIO.LOW)
+        GPIO.output(LED_SYSTEM_RESET, GPIO.LOW)
+        
+        logger.info("GPIO setup completed successfully")
+    except Exception as e:
+        logger.error(f"GPIO setup error: {e}")
+        print(f"GPIO setup error: {e}")
+
+def send_event_async(event_type, duration=None, start_user_id=None, end_user_id=None, start_comment=None, end_comment=None, cancel_reason=None, reaction_time=None, maintenance_arrival_user_id=None, breakdown=None):
+    if TEAM_NAME is None:
+        logger.error("Cannot send event: TEAM_NAME not set")
+        display_lcd_message("Error: TEAM_NAME\nnot set")
+        return
+    
+    def send_request():
+        try:
+            url = f"{MAIN_API_BASE_URL}/{event_type}/{TEAM_NAME}"
+            data = {
+                "machine": TEAM_NAME,
+                "duration": duration,
+                "start_user_id": start_user_id if start_user_id else "N/A",
+                "end_user_id": end_user_id if end_user_id else "N/A",
+                "start_comment": start_comment if start_comment else "",
+                "end_comment": end_comment if end_comment else "",
+                "cancel_reason": cancel_reason if cancel_reason else "",
+                "reaction_time": reaction_time,
+                "maintenance_arrival_user_id": maintenance_arrival_user_id if maintenance_arrival_user_id else "N/A",
+                "breakdown": breakdown
+            }
+            logger.info(f"Sending event to {url} - Details: {json.dumps(data)}")
+            response = requests.post(url, json=data, timeout=5)
+            if response.status_code == 200:
+                logger.info(f"Event sent successfully: {event_type} for {TEAM_NAME} - Response: {response.text}")
+            else:
+                logger.warning(f"Failed to send event: {event_type} - Status: {response.status_code} - Response: {response.text}")
+        except Exception as e:
+            logger.error(f"Error sending {event_type} event to {url}: {e} - Data: {json.dumps(data)}")
+    
+    Thread(target=send_request, daemon=True).start()
+
+def reset_system(event_type=None, end_user_id=None, end_comment=None, cancel_reason=None, breakdown=None):
+    global last_sensor_trigger, downtime_triggered, selected_led, is_first_run, event_start_time, awaiting_user_id, start_user_id, start_comment, sensor_alert_active
+    global maintenance_arrival_time, maintenance_arrival_user_id, maintenance_state, current_status, maintenance_option, material_change_start_time, material_change_active
+    duration = None
+    reaction_time = None
+    if event_type and event_start_time:
+        duration = time.time() - event_start_time
+        if event_type == "breakdown" and maintenance_arrival_time:
+            reaction_time = maintenance_arrival_time - event_start_time
+        log_message = f"Event {event_type} ended for {TEAM_NAME}. Duration: {duration:.2f} seconds"
+        if reaction_time is not None:
+            log_message += f", Reaction Time: {reaction_time:.2f} seconds"
+        logger.info(log_message)
+        print(log_message)
+        event_prefix = "cancel_" if cancel_reason else "reset_"
+        logger.info(f"Resetting system for event: {event_type}, breakdown: {breakdown}, start_comment: {start_comment}")
+        send_event_async(
+            f"{event_prefix}{event_type}",
+            duration,
+            start_user_id,
+            end_user_id,
+            start_comment,
+            end_comment,
+            cancel_reason,
+            reaction_time,
+            maintenance_arrival_user_id,
+            breakdown
+        )
+    
+    GPIO.output(LED_DOWNTIME, GPIO.LOW)
+    GPIO.output(LED_MAINTENANCE, GPIO.LOW)
+    GPIO.output(LED_BREAK, GPIO.LOW)
+    GPIO.output(LED_DOWNTIME_ALERT, GPIO.HIGH)
+    GPIO.output(LED_CANCEL, GPIO.LOW)
+    GPIO.output(LED_SYSTEM_RESET, GPIO.LOW)
+    last_sensor_trigger = time.time()
+    downtime_triggered = False
+    selected_led = None
+    event_start_time = None
+    start_user_id = None
+    start_comment = None
+    globals()['end_comment'] = None
+    is_first_run = True
+    awaiting_user_id = False
+    sensor_alert_active = False
+    maintenance_arrival_time = None
+    maintenance_arrival_user_id = None
+    maintenance_state = None
+    maintenance_option = None
+    material_change_start_time = None
+    material_change_active = False
+    current_status = "working"
+    logger.info("System reset")
+    if lcd:
+        try:
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("System Reset")
+            lcd.cursor_pos = (1, 0)
+            lcd.write_string(f"Machine: {TEAM_NAME or 'Unknown'}"[:20])
+            lcd.cursor_pos = (2, 0)
+            lcd.write_string("Ready for operation")
+        except Exception as e:
+            logger.error(f"LCD write error in reset_system: {e}\n{traceback.format_exc()}")
+            print(f"Warning: LCD write failed: {e}")
+    else:
+        print("\n====================\nLCD: System Reset\n====================\n")
+
+def display_lcd_message(message):
+    if not lcd:
+        logger.warning("LCD not initialized. Falling back to console output.")
+        print("\n" + "="*20)
+        print(f"LCD: {message}")
+        print("="*20 + "\n")
+        return
+    try:
+        lcd.clear()
+        words = message.split()
+        lines = []
+        current_line = ""
+        for word in words:
+            if len(current_line) + len(word) + 1 <= 20:
+                current_line += word + " "
+            else:
+                lines.append(current_line.strip())
+                current_line = word + " "
+        if current_line:
+            lines.append(current_line.strip())
+        
+        for i, line in enumerate(lines[:4]):
+            lcd.cursor_pos = (i, 0)
+            lcd.write_string(line[:20])
+        logger.info(f"LCD displayed: {message}")
+    except Exception as e:
+        logger.error(f"LCD write error: {e}\n{traceback.format_exc()}")
+        print(f"Warning: Failed to write to LCD: {e}. Message: {message}")
+    print("\n" + "="*20)
+    print(f"LCD: {message}")
+    print("="*20 + "\n")
+
+def display_countdown(seconds_remaining):
+    if not lcd:
+        logger.warning("LCD not initialized. Falling back to console output.")
+        print(f"LCD: Material Change\nTime Left: {seconds_remaining} sec")
+        return
+    try:
+        lcd.clear()
+        lcd.cursor_pos = (0, 0)
+        lcd.write_string("Material Change")
+        lcd.cursor_pos = (1, 0)
+        lcd.write_string(f"Time Left: {seconds_remaining} sec")
+        logger.info(f"LCD displayed countdown: {seconds_remaining} seconds")
+    except Exception as e:
+        logger.error(f"LCD write error in display_countdown: {e}\n{traceback.format_exc()}")
+        print(f"Warning: Failed to write to LCD: {e}")
+
+def get_input_with_lcd(prompt):
+    display_lcd_message(prompt)
+    input_str = ""
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        while True:
+            char = sys.stdin.read(1)
+            if char == '\r' or char == '\n':
+                break
+            elif char == '\x7f':
+                input_str = input_str[:-1]
+            elif char.isprintable():
+                input_str += char
+            if lcd:
+                try:
+                    lcd.clear()
+                    lcd.cursor_pos = (0, 0)
+                    lcd.write_string(prompt[:20])
+                    lcd.cursor_pos = (1, 0)
+                    lcd.write_string(input_str[:20])
+                except Exception as e:
+                    logger.error(f"LCD write error in get_input: {e}\n{traceback.format_exc()}")
+            print(f"\rInput: {input_str}", end="")
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        print()
+    logger.info(f"User entered: {input_str}")
+    return input_str.strip()
+
+def get_user_id_from_input(prompt="Enter User ID: "):
+    user_id = get_input_with_lcd(prompt)
+    if lcd:
+        try:
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("User ID Entered")
+            time.sleep(0.5)
+        except Exception as e:
+            logger.error(f"LCD clear error in get_user_id: {e}\n{traceback.format_exc()}")
+    return user_id if user_id else "N/A"
+
+def get_comment_from_input(prompt="Enter Comment (or press Enter to skip): "):
+    comment = get_input_with_lcd(prompt)
+    if lcd:
+        try:
+            lcd.clear()
+            lcd.cursor_pos = (0, 0)
+            lcd.write_string("Comment Entered")
+            time.sleep(0.5)
+        except Exception as e:
+            logger.error(f"LCD clear error in get_comment: {e}\n{traceback.format_exc()}")
+    return comment if comment else ""
+
+def get_maintenance_option():
+    options = {
+        "1": "Maintenance",
+        "2": "IT",
+        "3": "Production",
+        "4": "Quality"
+    }
+    while True:
+        if lcd:
+            try:
+                lcd.clear()
+                lcd.cursor_pos = (0, 0)
+                lcd.write_string("1 Maintenance"[:20])
+                lcd.cursor_pos = (1, 0)
+                lcd.write_string("2 IT"[:20])
+                lcd.cursor_pos = (2, 0)
+                lcd.write_string("3 Production"[:20])
+                lcd.cursor_pos = (3, 0)
+                lcd.write_string("4 Quality"[:20])
+                logger.info("Displayed maintenance options on LCD")
+                time.sleep(0.1)
+            except Exception as e:
+                logger.error(f"LCD write error in get_maintenance_option: {e}\n{traceback.format_exc()}")
+                print(f"Warning: Failed to write to LCD: {e}")
+        print("\n" + "="*20)
+        print("LCD: 1 Maintenance\n2 IT\n3 Production\n4 Quality\nEnter 1-4:")
+        print("="*20 + "\n")
+        
+        input_str = ""
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            while True:
+                char = sys.stdin.read(1)
+                if char == '\r' or char == '\n':
+                    break
+                elif char == '\x7f':
+                    input_str = input_str[:-1]
+                elif char.isprintable():
+                    input_str += char
+                if lcd:
+                    try:
+                        lcd.cursor_pos = (3, 0)
+                        lcd.write_string(f"Enter 1-4: {input_str[:10]}")
+                    except Exception as e:
+                        logger.error(f"LCD write error in get_maintenance_option input: {e}\n{traceback.format_exc()}")
+                print(f"\rInput: {input_str}", end="")
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            print()
+        
+        logger.info(f"User entered: {input_str}")
+        choice = input_str.strip()
+        if choice in options:
+            selected_option = options[choice]
+            logger.info(f"User selected maintenance option: {selected_option}")
+            if lcd:
+                try:
+                    lcd.clear()
+                    lcd.cursor_pos = (0, 0)
+                    lcd.write_string("Option Selected")
+                    time.sleep(0.5)
+                except Exception as e:
+                    logger.error(f"LCD clear error in get_maintenance_option: {e}\n{traceback.format_exc()}")
+            return selected_option
+        else:
+            if lcd:
+                try:
+                    lcd.clear()
+                    lcd.cursor_pos = (0, 0)
+                    lcd.write_string("Invalid Option!")
+                    lcd.cursor_pos = (1, 0)
+                    lcd.write_string("Enter 1-4:")
+                    time.sleep(0.5)
+                except Exception as e:
+                    logger.error(f"LCD write error in get_maintenance_option: {e}\n{traceback.format_exc()}")
+            print("\n" + "="*20)
+            print("LCD: Invalid Option!\nEnter 1-4:")
+            print("="*20 + "\n")
+            logger.warning(f"Invalid maintenance option entered: {choice}")
+def restore_power():
+    global power_on, current_status
+    power_on = True
+    current_status = "working"
+    GPIO.output(RELAY_POWER, GPIO.LOW)
+    logger.info("Power restored: Relay turned ON (machine powered on)")
+    print("Power restored: Relay turned ON")
+    display_lcd_message("Power Restored\nMachine ON")
+@app.route('/power_restore', methods=['POST'])
+def handle_power_restore():
+    global power_on
+    data = request.get_json() or {}
+    machine_name = data.get('machine_name')
+    if machine_name != TEAM_NAME:
+        logger.warning(f"Power restore request for wrong machine: {machine_name}, expected {TEAM_NAME}")
+        return jsonify({"error": "Machine name mismatch"}), 400
+    
+    if not power_on:
+        restore_power()
+        return jsonify({"status": "success", "message": "Power restored"}), 200
+    else:
+        logger.info("Power restore request received, but power is already on")
+        return jsonify({"status": "success", "message": "Power already on"}), 200
+def get_maintenance_type():
+    options = {
+        "1": "Curative",
+        "2": "Corrective",
+        "3": "Preventive"
+    }
+    while True:
+        if lcd:
+            try:
+                lcd.clear()
+                lcd.cursor_pos = (0, 0)
+                lcd.write_string("1 Curative"[:20])
+                lcd.cursor_pos = (1, 0)
+                lcd.write_string("2 Corrective"[:20])
+                lcd.cursor_pos = (2, 0)
+                lcd.write_string("3 Preventive"[:20])
+                lcd.cursor_pos = (3, 0)
+                lcd.write_string("Enter 1-3:"[:20])
+                logger.info("Displayed maintenance type options on LCD")
+                time.sleep(0.1)
+            except Exception as e:
+                logger.error(f"LCD write error in get_maintenance_type: {e}\n{traceback.format_exc()}")
+                print(f"Warning: Failed to write to LCD: {e}")
+        print("\n" + "="*20)
+        print("LCD: 1 Curative\n2 Corrective\n3 Preventive\nEnter 1-3:")
+        print("="*20 + "\n")
+        
+        input_str = ""
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            while True:
+                char = sys.stdin.read(1)
+                if char == '\r' or char == '\n':
+                    break
+                elif char == '\x7f':
+                    input_str = input_str[:-1]
+                elif char.isprintable():
+                    input_str += char
+                if lcd:
+                    try:
+                        lcd.cursor_pos = (3, 0)
+                        lcd.write_string(f"Enter 1-3: {input_str[:10]}")
+                    except Exception as e:
+                        logger.error(f"LCD write error in get_maintenance_type input: {e}\n{traceback.format_exc()}")
+                print(f"\rInput: {input_str}", end="")
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            print()
+        
+        logger.info(f"User entered maintenance type: {input_str}")
+        choice = input_str.strip()
+        if choice in options:
+            selected_type = options[choice]
+            logger.info(f"User selected maintenance type: {selected_type}")
+            if lcd:
+                try:
+                    lcd.clear()
+                    lcd.cursor_pos = (0, 0)
+                    lcd.write_string("Type Selected")
+                    time.sleep(0.5)
+                except Exception as e:
+                    logger.error(f"LCD clear error in get_maintenance_type: {e}\n{traceback.format_exc()}")
+            return selected_type
+        else:
+            if lcd:
+                try:
+                    lcd.clear()
+                    lcd.cursor_pos = (0, 0)
+                    lcd.write_string("Invalid Option!")
+                    lcd.cursor_pos = (1, 0)
+                    lcd.write_string("Enter 1-3:")
+                    time.sleep(0.5)
+                except Exception as e:
+                    logger.error(f"LCD write error in get_maintenance_type: {e}\n{traceback.format_exc()}")
+            print("\n" + "="*20)
+            print("LCD: Invalid Option!\nEnter 1-3:")
+            print("="*20 + "\n")
+            logger.warning(f"Invalid maintenance type entered: {choice}")
+
+def get_cancel_reason_from_input():
+    while True:
+        reason = get_input_with_lcd("Enter Reason for\nCancellation\n(required):")
+        if reason:
+            logger.info(f"User entered cancel reason: {reason}")
+            if lcd:
+                try:
+                    lcd.clear()
+                    lcd.cursor_pos = (0, 0)
+                    lcd.write_string("Reason Entered")
+                    time.sleep(0.5)
+                except Exception as e:
+                    logger.error(f"LCD clear error in get_cancel_reason: {e}\n{traceback.format_exc()}")
+            return reason
+        else:
+            print("Cancel reason cannot be empty. Please provide a reason.")
+            display_lcd_message("Reason cannot be\nempty. Try again:")
+
+def cut_power():
+    global power_on, current_status
+    power_on = False
+    current_status = "offline"
+    GPIO.output(RELAY_POWER, GPIO.HIGH)
+    logger.info("Power cut: Relay turned OFF (machine powered off)")
+    print("Power cut: Relay turned OFF")
+    display_lcd_message("Power Cut!\nMachine OFF")
+
+
+@app.route('/power_cut', methods=['POST'])
+def handle_power_cut():
+    global power_on
+    data = request.get_json() or {}
+    machine_name = data.get('machine_name')
+    if machine_name != TEAM_NAME:
+        logger.warning(f"Power cut request for wrong machine: {machine_name}, expected {TEAM_NAME}")
+        return jsonify({"error": "Machine name mismatch"}), 400
+    
+    if power_on:
+        cut_power()
+        return jsonify({"status": "success", "message": "Power cut executed"}), 200
+    else:
+        logger.info("Power cut request received, but power is already off")
+        return jsonify({"status": "success", "message": "Power already off"}), 200
+
+@app.route('/status', methods=['GET'])
+def get_status():
+    global current_status
+    logger.info(f"Status request received, returning status: {current_status}")
+    return jsonify({"status": current_status, "machine_name": TEAM_NAME}), 200
+
+def selected_led_to_event_type(led):
+    if led == LED_DOWNTIME:
+        return "downtime"
+    elif led == LED_MAINTENANCE:
+        return start_comment.lower() or "breakdown"
+    elif led == LED_BREAK:
+        return "break"
+    return None
+
+def monitor_buttons_and_downtime():
+    global last_sensor_trigger, downtime_triggered, selected_led, is_first_run, event_start_time, awaiting_user_id
+    global start_user_id, start_comment, end_comment, sensor_alert_active, maintenance_arrival_time
+    global maintenance_arrival_user_id, maintenance_state, current_status, maintenance_option
+    global material_change_start_time, material_change_active
+    
+    prev_sensor = GPIO.HIGH
+    prev_changing_material = GPIO.HIGH
+    prev_maintenance = GPIO.HIGH
+    prev_break = GPIO.HIGH
+    prev_cancel = GPIO.HIGH
+    prev_power_cut = GPIO.HIGH
+    prev_system_reset = GPIO.HIGH
+    
+    flash_state = False
+    last_flash_time = time.time()
+    last_countdown_update = time.time()
+    
+    while True:
+        try:
+            curr_sensor = GPIO.input(SENSOR_OBSTACLE)
+            curr_changing_material = GPIO.input(BUTTON_CHANGING_MATERIAL)
+            curr_maintenance = GPIO.input(BUTTON_MAINTENANCE)
+            curr_break = GPIO.input(BUTTON_BREAK)
+            curr_cancel = GPIO.input(BUTTON_CANCEL)
+            curr_power_cut = GPIO.input(BUTTON_POWER_CUT)
+            curr_system_reset = GPIO.input(BUTTON_SYSTEM_RESET)
+            
+            if prev_sensor == GPIO.HIGH and curr_sensor == GPIO.LOW and is_first_run:
+                logger.info(f"Sensor triggered on GPIO {SENSOR_OBSTACLE} for {TEAM_NAME}")
+                print(f"Sensor triggered on GPIO {SENSOR_OBSTACLE}")
+                last_sensor_trigger = time.time()
+                if downtime_triggered or selected_led:
+                    reset_system(selected_led_to_event_type(selected_led))
+            
+            if (time.time() - last_sensor_trigger > 5 and not downtime_triggered and not selected_led 
+                and not material_change_active and selected_led != LED_BREAK):
+                logger.info(f"5 seconds passed without sensor trigger for {TEAM_NAME} - Triggering downtime alert")
+                print("5 seconds passed without sensor trigger - Triggering downtime alert")
+                GPIO.output(LED_DOWNTIME, GPIO.HIGH)
+                GPIO.output(LED_MAINTENANCE, GPIO.HIGH)
+                GPIO.output(LED_BREAK, GPIO.HIGH)
+                GPIO.output(LED_DOWNTIME_ALERT, GPIO.LOW)
+                GPIO.output(LED_CANCEL, GPIO.HIGH)
+                GPIO.output(LED_SYSTEM_RESET, GPIO.HIGH)
+                downtime_triggered = True
+                is_first_run = False
+                current_status = "downtime"
+                display_lcd_message("Downtime Alert!\nSelect Event Type")
+            
+            if material_change_active and time.time() - material_change_start_time > 180 and not downtime_triggered:
+                logger.info(f"Material change timer expired for {TEAM_NAME} - Triggering downtime")
+                print("Material change timer expired - Triggering downtime")
+                GPIO.output(LED_DOWNTIME, GPIO.HIGH)
+                GPIO.output(LED_MAINTENANCE, GPIO.HIGH)
+                GPIO.output(LED_BREAK, GPIO.HIGH)
+                GPIO.output(LED_DOWNTIME_ALERT, GPIO.LOW)
+                GPIO.output(LED_CANCEL, GPIO.HIGH)
+                GPIO.output(LED_SYSTEM_RESET, GPIO.HIGH)
+                downtime_triggered = True
+                material_change_active = False
+                material_change_start_time = None
+                current_status = "downtime"
+                display_lcd_message("Downtime Alert!\nSelect Event Type")
+            
+            if material_change_active and time.time() - last_countdown_update >= 1:
+                seconds_remaining = int(180 - (time.time() - material_change_start_time))
+                if seconds_remaining >= 0:
+                    display_countdown(seconds_remaining)
+                last_countdown_update = time.time()
+            
+            if selected_led and not awaiting_user_id:
+                if prev_sensor == GPIO.HIGH and curr_sensor == GPIO.LOW and not sensor_alert_active and selected_led not in [LED_BREAK, LED_EMERGENCY]:
+                    logger.info(f"Sensor detected machine working during {selected_led_to_event_type(selected_led)} event for {TEAM_NAME}")
+                    print(f"WARNING: Machine working detected during {selected_led_to_event_type(selected_led)}!")
+                    sensor_alert_active = True
+                    display_lcd_message(f"WARNING: Machine\nActive During\n{selected_led_to_event_type(selected_led).title()}!")
+                
+                elif prev_sensor == GPIO.LOW and curr_sensor == GPIO.HIGH and sensor_alert_active and selected_led not in [LED_BREAK, LED_EMERGENCY]:
+                    logger.info(f"Sensor stopped during {selected_led_to_event_type(selected_led)} event for {TEAM_NAME}")
+                    print(f"Sensor stopped. Resuming {selected_led_to_event_type(selected_led)} event.")
+                    sensor_alert_active = False
+                    display_lcd_message(f"Resuming\n{selected_led_to_event_type(selected_led).title()}")
+                    last_sensor_trigger = time.time()
+            
+            if time.time() - last_flash_time >= 0.25:
+                flash_state = not flash_state
+                last_flash_time = time.time()
+                
+                if sensor_alert_active:
+                    GPIO.output(LED_DOWNTIME, GPIO.HIGH if flash_state else GPIO.LOW)
+                    GPIO.output(LED_MAINTENANCE, GPIO.HIGH if flash_state else GPIO.LOW)
+                    GPIO.output(LED_BREAK, GPIO.HIGH if flash_state else GPIO.LOW)
+                    GPIO.output(LED_CANCEL, GPIO.HIGH if flash_state else GPIO.LOW)
+                    GPIO.output(LED_SYSTEM_RESET, GPIO.HIGH if flash_state else GPIO.LOW)
+                elif selected_led and not awaiting_user_id:
+                    if selected_led in [LED_DOWNTIME, LED_BREAK]:
+                        GPIO.output(selected_led, GPIO.HIGH if flash_state else GPIO.LOW)
+                    elif selected_led == LED_MAINTENANCE and maintenance_state == "arrived":
+                        GPIO.output(selected_led, GPIO.HIGH if flash_state else GPIO.LOW)
+            
+            if prev_power_cut == GPIO.HIGH and curr_power_cut == GPIO.LOW:
+                logger.info(f"Power cut simulation button PRESSED on GPIO {BUTTON_POWER_CUT} for {TEAM_NAME}")
+                print(f"Power cut simulation button PRESSED on GPIO {BUTTON_POWER_CUT}")
+                if power_on:
+                    cut_power()
+                else:
+                    restore_power()
+            
+            if not awaiting_user_id:
+                if prev_changing_material == GPIO.HIGH and curr_changing_material == GPIO.LOW:
+                    logger.info(f"Changing material button PRESSED on GPIO {BUTTON_CHANGING_MATERIAL} for {TEAM_NAME}")
+                    print(f"Changing material button PRESSED on GPIO {BUTTON_CHANGING_MATERIAL}")
+                    if material_change_active:
+                        material_change_active = False
+                        material_change_start_time = None
+                        logger.info("Material change stopped")
+                        reset_system()
+                        display_lcd_message("Material Change\nStopped\nSystem Reset")
+                    elif selected_led == LED_DOWNTIME:
+                        awaiting_user_id = True
+                        end_user_id = get_user_id_from_input("Enter User ID to end\ndowntime:")
+                        end_comment = get_comment_from_input("Enter End Comment\n(or press Enter to\nskip):")
+                        reset_system("downtime", end_user_id, end_comment)
+                    elif downtime_triggered and not selected_led:
+                        GPIO.output(LED_MAINTENANCE, GPIO.LOW)
+                        GPIO.output(LED_BREAK, GPIO.LOW)
+                        GPIO.output(LED_DOWNTIME_ALERT, GPIO.HIGH)
+                        GPIO.output(LED_CANCEL, GPIO.LOW)
+                        GPIO.output(LED_SYSTEM_RESET, GPIO.LOW)
+                        selected_led = LED_DOWNTIME
+                        downtime_triggered = False
+                        event_start_time = time.time()
+                        awaiting_user_id = True
+                        start_user_id = get_user_id_from_input("Enter User ID to\nstart downtime:")
+                        start_comment = get_comment_from_input("Enter Start Comment\n(or press Enter to\nskip):")
+                        current_status = "downtime"
+                        send_event_async("downtime", start_user_id=start_user_id, start_comment=start_comment)
+                        awaiting_user_id = False
+                        display_lcd_message("Downtime Started")
+                    else:
+                        material_change_active = True
+                        material_change_start_time = time.time()
+                        last_countdown_update = time.time()
+                        logger.info("Material change started")
+                        display_countdown(180)
+                
+                elif prev_maintenance == GPIO.HIGH and curr_maintenance == GPIO.LOW:
+                    logger.info(f"Maintenance button PRESSED on GPIO {BUTTON_MAINTENANCE} for {TEAM_NAME}")
+                    print(f"Maintenance button PRESSED on GPIO {BUTTON_MAINTENANCE}")
+                    if selected_led == LED_MAINTENANCE:
+                        if maintenance_state == "started":
+                            awaiting_user_id = True
+                            maintenance_arrival_user_id = get_user_id_from_input("Enter User ID for\nmaintenance arrival:")
+                            maintenance_arrival_time = time.time()
+                            reaction_time = maintenance_arrival_time - event_start_time
+                            logger.info(f"Maintenance arrived for {TEAM_NAME}. Reaction time: {reaction_time:.2f} seconds")
+                            maintenance_state = "arrived"
+                            send_event_async(
+                                "maintenance_arrival",
+                                reaction_time=reaction_time,
+                                maintenance_arrival_user_id=maintenance_arrival_user_id
+                            )
+                            awaiting_user_id = False
+                            display_lcd_message("Maintenance Arrived\nPress to End")
+                        elif maintenance_state == "arrived":
+                            awaiting_user_id = True
+                            end_user_id = get_user_id_from_input("Enter User ID to end\nmaintenance:")
+                            breakdown_type = None
+                            if maintenance_option == "Maintenance":
+                                breakdown_type = get_maintenance_type()
+                                logger.info(f"Maintenance type selected: {breakdown_type}")
+                                if breakdown_type:
+                                    start_comment = breakdown_type
+                                else:
+                                    logger.warning("No maintenance type selected, keeping start_comment as is")
+                            else:
+                                logger.info(f"Non-Maintenance option ({maintenance_option}), breakdown_type set to None")
+                            end_comment = get_comment_from_input("Enter End Comment\n(or press Enter to\nskip):")
+                            logger.info(f"Calling reset_system with breakdown_type: {breakdown_type}, start_comment: {start_comment}")
+                            reset_system(start_comment.lower(), end_user_id, end_comment, breakdown=breakdown_type)
+                            awaiting_user_id = False
+                    elif downtime_triggered and not selected_led:
+                        GPIO.output(LED_DOWNTIME, GPIO.LOW)
+                        GPIO.output(LED_BREAK, GPIO.LOW)
+                        GPIO.output(LED_DOWNTIME_ALERT, GPIO.HIGH)
+                        GPIO.output(LED_CANCEL, GPIO.LOW)
+                        GPIO.output(LED_SYSTEM_RESET, GPIO.LOW)
+                        selected_led = LED_MAINTENANCE
+                        downtime_triggered = False
+                        event_start_time = time.time()
+                        awaiting_user_id = True
+                        start_user_id = get_user_id_from_input("Enter User ID to\nstart event:")
+                        maintenance_option = get_maintenance_option()
+                        start_comment = maintenance_option
+                        maintenance_state = "started"
+                        current_status = start_comment.lower()
+                        logger.info(f"Breakdown started with start_comment: {start_comment}")
+                        send_event_async(start_comment.lower(), start_user_id=start_user_id, start_comment=start_comment)
+                        awaiting_user_id = False
+                        GPIO.output(LED_MAINTENANCE, GPIO.HIGH)
+                        display_lcd_message(f"{start_comment.title()} Started\nPress when arrived")
+                
+                elif prev_break == GPIO.HIGH and curr_break == GPIO.LOW:
+                    logger.info(f"Break button PRESSED on GPIO {BUTTON_BREAK} for {TEAM_NAME}")
+                    print(f"Break button PRESSED on GPIO {BUTTON_BREAK}")
+                    if selected_led == LED_BREAK:
+                        awaiting_user_id = True
+                        end_user_id = get_user_id_from_input("Enter User ID to end\nbreak:")
+                        end_comment = get_comment_from_input("Enter End Comment\n(or press Enter to\nskip):")
+                        GPIO.output(LED_BREAK, GPIO.LOW)
+                        reset_system("break", end_user_id, end_comment)
+                    else:
+                        GPIO.output(LED_DOWNTIME, GPIO.LOW)
+                        GPIO.output(LED_MAINTENANCE, GPIO.LOW)
+                        GPIO.output(LED_DOWNTIME_ALERT, GPIO.HIGH)
+                        GPIO.output(LED_CANCEL, GPIO.LOW)
+                        GPIO.output(LED_SYSTEM_RESET, GPIO.LOW)
+                        selected_led = LED_BREAK
+                        downtime_triggered = False
+                        event_start_time = time.time()
+                        awaiting_user_id = True
+                        start_user_id = get_user_id_from_input("Enter User ID to\nstart break:")
+                        start_comment = get_comment_from_input("Enter Start Comment\n(or press Enter to\nskip):")
+                        current_status = "break"
+                        send_event_async("break", start_user_id=start_user_id, start_comment=start_comment)
+                        awaiting_user_id = False
+                        display_lcd_message("Break Started")
+                
+                elif prev_cancel == GPIO.HIGH and curr_cancel == GPIO.LOW:
+                    logger.info(f"Cancel button PRESSED on GPIO {BUTTON_CANCEL} for {TEAM_NAME}")
+                    print(f"Cancel button PRESSED on GPIO {BUTTON_CANCEL}")
+                    if selected_led:
+                        awaiting_user_id = True
+                        cancel_reason = get_cancel_reason_from_input()
+                        end_user_id = get_user_id_from_input("Enter User ID to\ncancel event:")
+                        breakdown_type = None
+                        if selected_led == LED_MAINTENANCE and maintenance_option == "Maintenance":
+                            breakdown_type = get_maintenance_type()
+                            logger.info(f"Cancel: Maintenance type selected: {breakdown_type}")
+                            if breakdown_type:
+                                start_comment = breakdown_type
+                            else:
+                                logger.warning("Cancel: No maintenance type selected, keeping start_comment as is")
+                        else:
+                            logger.info(f"Cancel: Non-Maintenance option ({maintenance_option}), breakdown_type set to None")
+                        logger.info(f"Cancel: Calling reset_system with breakdown_type: {breakdown_type}, start_comment: {start_comment}")
+                        reset_system(selected_led_to_event_type(selected_led), end_user_id, cancel_reason=cancel_reason, breakdown=breakdown_type)
+                        awaiting_user_id = False
+                        display_lcd_message("Event Cancelled")
+                
+                elif prev_system_reset == GPIO.HIGH and curr_system_reset == GPIO.LOW:
+                    logger.info(f"System reset button PRESSED on GPIO {BUTTON_SYSTEM_RESET} for {TEAM_NAME}")
+                    print(f"System reset button PRESSED on GPIO {BUTTON_SYSTEM_RESET}")
+                    reset_system()
+                    display_lcd_message("System Reset\nReady to Run")
+            
+            prev_sensor = curr_sensor
+            prev_changing_material = curr_changing_material
+            prev_maintenance = curr_maintenance
+            prev_break = curr_break
+            prev_cancel = curr_cancel
+            prev_power_cut = curr_power_cut
+            prev_system_reset = curr_system_reset
+            
+            time.sleep(0.01)
+        
+        except KeyboardInterrupt:
+            logger.info("Program interrupted by user")
+            print("Program interrupted by user")
+            break
+        except Exception as e:
+            logger.error(f"Error in monitor_buttons_and_downtime: {e}\n{traceback.format_exc()}")
+            print(f"Error in monitor loop: {e}")
+            time.sleep(1)
+
+def main():
+    global TEAM_NAME
+    try:
+        GPIO.cleanup()
+        logger.info("Initial GPIO cleanup completed")
+        
+        initialize_lcd()
+        
+        ip_address = get_ip_address()
+        if ip_address:
+            TEAM_NAME = fetch_machine_name(ip_address)
+        if not TEAM_NAME:
+            logger.error("Failed to retrieve machine name. Using default 'Unknown'")
+            TEAM_NAME = "Unknown"
+        
+        setup_gpio()
+        time.sleep(0.1)
+        
+        if lcd:
+            try:
+                lcd.clear()
+                lcd.cursor_pos = (0, 0)
+                lcd.write_string(f"Machine: {TEAM_NAME}"[:20])
+                lcd.cursor_pos = (1, 0)
+                lcd.write_string("Ready for operation")
+            except Exception as e:
+                logger.error(f"LCD write error in main: {e}\n{traceback.format_exc()}")
+                print(f"Warning: LCD write failed: {e}")
+        else:
+            print("\n====================\nLCD: System Ready\n====================\n")
+        
+        flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=8000, debug=False, use_reloader=False), daemon=True)
+        flask_thread.start()
+        logger.info("Flask server started on port 8000 for power cut signals")
+        
+        logger.info(f"System started for {TEAM_NAME}. Waiting for sensor triggers...")
+        print(f"System started for {TEAM_NAME}. Sensor must detect obstacle to prevent downtime (first run only).")
+        print("If 5 seconds pass without detection, downtime alert LED will turn on steadily (active low).")
+        print("Press the Power Cut button (GPIO 8) to simulate a power cut.")
+        print("Press the System Reset button (GPIO 5) to reset the system.")
+        
+        monitor_buttons_and_downtime()
+    
+    except Exception as e:
+        logger.error(f"Main loop error: {e}\n{traceback.format_exc()}")
+        print(f"Main loop error: {e}")
+    finally:
+        if lcd:
+            try:
+                lcd.clear()
+                lcd.backlight_enabled = False
+            except Exception as e:
+                logger.error(f"LCD cleanup error: {e}\n{traceback.format_exc()}")
+        GPIO.cleanup()
+        logger.info("GPIO and LCD cleaned up")
+        print("GPIO and LCD cleaned up")
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        logger.info("System shutdown via keyboard interrupt")
+        print("\nShutting down...")
