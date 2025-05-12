@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 Event Dashboard - {{ machine_name }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background-color: #eef2f7; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1, h3 { color: #2c3e50; text-align: center; }
+        .button-group { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 20px 0; }
+        button, .link-btn { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; color: white; font-weight: bold; transition: transform 0.2s, background-color 0.3s; }
+        button:hover, .link-btn:hover { transform: scale(1.05); }
+        .refresh-btn { background-color: #27ae60; }
+        .simulate-btn { background-color: #3498db; }
+        .link-btn { background-color: #7f8c8d; text-decoration: none; display: inline-block; }
+        .indicators { display: flex; justify-content: space-around; margin: 20px 0; flex-wrap: wrap; }
+        .indicator-box { background: #ecf0f1; padding: 15px; border-radius: 8px; text-align: center; min-width: 200px; margin: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #fff; }
+        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #ecf0f1; }
+        th { background-color: #34495e; color: white; }
+        tr:nth-child(even) { background-color: #f9fbfc; }
+        .chart-container { width: 50%; margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ESP32 Event Dashboard - {{ machine_name }}</h1>
+        
+        <div class="button-group">
+            <button class="simulate-btn" onclick="simulateEvent('downtime', '{{ machine_name }}')">Simulate Downtime</button>
+            <button class="simulate-btn" onclick="simulateEvent('maintenance', '{{ machine_name }}')">Simulate Maintenance</button>
+            <button class="simulate-btn" onclick="simulateEvent('emergency', '{{ machine_name }}')">Simulate Emergency</button>
+            <button class="refresh-btn" onclick="updateAll()">Refresh All</button>
+            <a href="/stats" class="link-btn">View Statistics</a>
+            <a href="/logout" class="link-btn">Logout</a>
+        </div>
+
+        <h3>Real-Time Indicators</h3>
+        <div class="indicators">
+            <div class="indicator-box"><h4>Total Events</h4><p id="totalEvents">0</p></div>
+            <div class="indicator-box"><h4>Downtime Count</h4><p id="downtimeCount">0</p></div>
+            <div class="indicator-box"><h4>Last Event</h4><p id="lastEvent">-</p></div>
+        </div>
+        <div class="chart-container"><canvas id="eventTypeChart"></canvas></div>
+
+        <h3>Downtime History</h3>
+        <table id="downtimeTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Machine</th>
+                    <th>Timestamp</th>
+                    <th>Duration (s)</th>
+                    <th>Reason</th>
+                    <th>Start User</th>
+                    <th>End User</th>
+                </tr>
+            </thead>
+            <tbody id="downtimeBody"></tbody>
+        </table>
+
+        <h3>Intervention History</h3>
+        <table id="interventionTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Event Type</th>
+                    <th>Machine</th>
+                    <th>Timestamp</th>
+                    <th>Duration (s)</th>
+                    <th>Reason</th>
+                    <th>Start User</th>
+                    <th>End User</th>
+                </tr>
+            </thead>
+            <tbody id="interventionBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let eventTypeChart;
+
+        function updateIndicators() {
+            fetch('/api/realtime_indicators')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('totalEvents').textContent = data.total_events;
+                    document.getElementById('downtimeCount').textContent = data.events_by_type.downtime || 0;
+                    document.getElementById('lastEvent').textContent = data.last_event 
+                        ? `${data.last_event.event_type} (${data.last_event.machine}) at ${data.last_event.timestamp}`
+                        : 'No events yet';
+
+                    if (eventTypeChart) eventTypeChart.destroy();
+                    const ctx = document.getElementById('eventTypeChart').getContext('2d');
+                    eventTypeChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: Object.keys(data.events_by_type),
+                            datasets: [{
+                                label: 'Event Count',
+                                data: Object.values(data.events_by_type),
+                                backgroundColor: ['#e74c3c', '#3498db', '#2ecc71'],
+                                borderColor: ['#c0392b', '#2980b9', '#27ae60'],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+                    });
+                })
+                .catch(error => console.error('Error updating indicators:', error));
+        }
+
+        function updateDowntimeHistory() {
+            fetch('/api/downtime_history')
+                .then(response => response.json())
+                .then(data => {
+                    const downtimeBody = document.getElementById('downtimeBody');
+                    downtimeBody.innerHTML = '';
+                    data.downtimes.forEach(downtime => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${downtime.id}</td>
+                            <td>${downtime.machine}</td>
+                            <td>${downtime.timestamp}</td>
+                            <td>${downtime.duration !== null ? downtime.duration.toFixed(2) : '-'}</td>
+                            <td>${downtime.reason || 'N/A'}</td>
+                            <td>${downtime.start_user_id || 'N/A'}</td>
+                            <td>${downtime.end_user_id || 'N/A'}</td>
+                        `;
+                        downtimeBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error updating downtime history:', error));
+        }
+
+        function updateInterventionHistory() {
+            fetch('/api/intervention_history')
+                .then(response => response.json())
+                .then(data => {
+                    const interventionBody = document.getElementById('interventionBody');
+                    interventionBody.innerHTML = '';
+                    data.interventions.forEach(intervention => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${intervention.id}</td>
+                            <td>${intervention.event_type}</td>
+                            <td>${intervention.machine}</td>
+                            <td>${intervention.timestamp}</td>
+                            <td>${intervention.duration !== null ? intervention.duration.toFixed(2) : '-'}</td>
+                            <td>${intervention.reason || 'N/A'}</td>
+                            <td>${intervention.start_user_id || 'N/A'}</td>
+                            <td>${intervention.end_user_id || 'N/A'}</td>
+                        `;
+                        interventionBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error updating intervention history:', error));
+        }
+
+        function simulateEvent(eventType, machine) {
+            fetch(`/api/${eventType}/${machine}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ machine: machine, start_user_id: 'SIM123', reason: 'Test simulation' })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(`${eventType} simulated for ${machine}`);
+                        updateAll();
+                    } else {
+                        alert(`Failed to simulate ${eventType}: ${data.error}`);
+                    }
+                })
+                .catch(error => console.error('Error simulating event:', error));
+        }
+
+        function updateAll() {
+            updateIndicators();
+            updateDowntimeHistory();
+            updateInterventionHistory();
+        }
+
+        updateAll();
+        setInterval(updateAll, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Team Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #eef2f7;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        button, .back-link {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover, .back-link:hover { transform: scale(1.05); }
+        .refresh-btn { background-color: #27ae60; }
+        .add-btn { background-color: #3498db; }
+        .update-btn { background-color: #f39c12; }
+        .close-btn { background-color: #7f8c8d; }
+        .back-link { background-color: #7f8c8d; text-decoration: none; display: inline-block; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        tr:nth-child(even) { background-color: #f9fbfc; }
+        tr:hover { background-color: #ecf0f1; cursor: pointer; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 20px;
+            width: 350px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .modal-content button {
+            width: 48%;
+            margin: 5px 1%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Team Management</h1>
+        <div class="button-group">
+            <button class="refresh-btn" onclick="fetchTeams()">Refresh Teams</button>
+            <button class="add-btn" onclick="openModal('add')">Add Team</button>
+            <a href="/" class="back-link">Back to Dashboard</a>
+        </div>
+
+        <table id="teamsTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="teamsBody"></tbody>
+        </table>
+
+        <!-- Add Team Modal -->
+        <div id="addModal" class="modal">
+            <div class="modal-content">
+                <h3>Add Team</h3>
+                <input type="text" id="addTeamName" placeholder="Team Name">
+                <input type="text" id="addTeamEmail" placeholder="Team Email">
+                <button class="add-btn" onclick="addTeam()">Add</button>
+                <button class="close-btn" onclick="closeModal('add')">Close</button>
+            </div>
+        </div>
+
+        <!-- Update Team Modal -->
+        <div id="updateModal" class="modal">
+            <div class="modal-content">
+                <h3>Update Team</h3>
+                <input type="text" id="oldTeamName" placeholder="Current Team Name" readonly>
+                <input type="text" id="newTeamName" placeholder="New Team Name">
+                <input type="text" id="newTeamEmail" placeholder="New Email">
+                <button class="update-btn" onclick="updateTeam()">Update</button>
+                <button class="close-btn" onclick="closeModal('update')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fetchTeams() {
+            fetch('/api/teams')
+                .then(response => response.json())
+                .then(data => {
+                    const teamsBody = document.getElementById('teamsBody');
+                    teamsBody.innerHTML = '';
+                    if (data.teams) {
+                        data.teams.forEach(team => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${team.name}</td>
+                                <td>${team.email}</td>
+                            `;
+                            row.onclick = () => openUpdateModal(team.name, team.email);
+                            teamsBody.appendChild(row);
+                        });
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function openModal(type) {
+            document.getElementById(`${type}Modal`).style.display = 'block';
+        }
+
+        function closeModal(type) {
+            document.getElementById(`${type}Modal`).style.display = 'none';
+        }
+
+        function openUpdateModal(name, email) {
+            document.getElementById('oldTeamName').value = name;
+            document.getElementById('newTeamName').value = name;
+            document.getElementById('newTeamEmail').value = email;
+            openModal('update');
+        }
+
+        function addTeam() {
+            const name = document.getElementById('addTeamName').value;
+            const email = document.getElementById('addTeamEmail').value;
+            fetch('/api/teams', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                closeModal('add');
+                fetchTeams();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function updateTeam() {
+            const oldName = document.getElementById('oldTeamName').value;
+            const newName = document.getElementById('newTeamName').value;
+            const email = document.getElementById('newTeamEmail').value;
+            fetch(`/api/teams/${oldName}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ new_name: newName, email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                closeModal('update');
+                fetchTeams();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        fetchTeams();
+        setInterval(fetchTeams, 5000);
+    </script>
+</body>
+</html>

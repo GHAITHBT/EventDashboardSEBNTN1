@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventive Maintenance Management</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --info: #3498db;
+            --light: #f8f9fa;
+            --dark: #1e293b;
+            --overdue-color: #c0392b;
+            --canceled-color: #7f8c8d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+        }
+
+        .header-btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .header-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-success { background-color: var(--success); }
+        .btn-danger { background-color: var(--danger); }
+        .btn-info { background-color: var(--info); }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f0f4f8;
+        }
+
+        .status-scheduled { color: var(--info); font-weight: bold; }
+        .status-notified_d2 { color: var(--warning); font-weight: bold; }
+        .status-notified_d1 { color: var(--warning); font-weight: bold; }
+        .status-due { color: var(--success); font-weight: bold; }
+        .status-overdue { color: var(--overdue-color); font-weight: bold; }
+        .status-completed { color: var(--success); font-weight: bold; }
+        .status-canceled { color: var(--canceled-color); font-weight: bold; }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s, fadeOut 0.5s 3.5s forwards;
+        }
+
+        .notification-success { background-color: var(--success); }
+        .notification-error { background-color: var(--danger); }
+
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 10px; }
+            .form-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+            .header h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Preventive Maintenance Management</h1>
+            <div>
+                <a href="/admin"><button class="header-btn">Back to Dashboard</button></a>
+                
+            </div>
+        </header>
+
+        <div class="form-container">
+            <h2>Add/Edit Preventive Maintenance</h2>
+            <form id="maintenanceForm">
+                <div class="form-group">
+                    <label for="machine_name">Machine</label>
+                    <select id="machine_name" name="machine_name" required>
+                        <option value="">Select a machine</option>
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="maintenance_date">Maintenance Date</label>
+                    <input type="date" id="maintenance_date" name="maintenance_date" required>
+                </div>
+                <input type="hidden" id="schedule_id" name="schedule_id">
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-success">Save Schedule</button>
+                    <button type="button" class="btn btn-info" onclick="clearForm()">Clear</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2>Maintenance Schedules</h2>
+            <table id="maintenanceTable">
+                <thead>
+                    <tr>
+                        <th>Machine</th>
+                        <th>Maintenance Date</th>
+                        <th>Status</th>
+                        <th>Power Cut Sent</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="maintenanceBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function fetchMachines() {
+            fetch('/api/available_machines')
+                .then(response => response.json())
+                .then(data => {
+                    const machineSelect = document.getElementById('machine_name');
+                    machineSelect.innerHTML = '<option value="">Select a machine</option>';
+                    data.machines.forEach(machine => {
+                        const option = document.createElement('option');
+                        option.value = machine.machine_name;
+                        option.textContent = machine.machine_name;
+                        machineSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching machines:', error);
+                    showNotification('Failed to fetch machines', 'error');
+                });
+        }
+
+        function fetchMaintenanceSchedules() {
+            fetch('/api/preventive_maintenance')
+                .then(response => response.json())
+                .then(data => {
+                    const maintenanceBody = document.getElementById('maintenanceBody');
+                    maintenanceBody.innerHTML = '';
+                    data.schedules.forEach(schedule => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${schedule.machine_name}</td>
+                            <td>${schedule.maintenance_date}</td>
+                            <td class="status-${schedule.status}">${schedule.status}</td>
+                            <td>${schedule.power_cut_sent ? 'Yes' : 'No'}</td>
+                            <td>
+                                <button class="btn btn-info" onclick="editSchedule(${schedule.id}, '${schedule.machine_name}', '${schedule.maintenance_date}')">Edit</button>
+                                <button class="btn btn-success" onclick="confirmCompletion(${schedule.id})">Complete</button>
+                                <button class="btn btn-danger" onclick="cancelSchedule(${schedule.id})">Cancel</button>
+                            </td>
+                        `;
+                        maintenanceBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching maintenance schedules:', error);
+                    showNotification('Failed to fetch maintenance schedules', 'error');
+                });
+        }
+
+        function saveSchedule(event) {
+            event.preventDefault();
+            const scheduleId = document.getElementById('schedule_id').value;
+            const machineName = document.getElementById('machine_name').value;
+            const maintenanceDate = document.getElementById('maintenance_date').value;
+
+            const payload = { machine_name: machineName, maintenance_date: maintenanceDate };
+            const url = scheduleId ? `/api/update_maintenance/${scheduleId}` : '/api/add_maintenance';
+            const method = scheduleId ? 'PUT' : 'POST';
+
+            fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showNotification(scheduleId ? 'Schedule updated' : 'Schedule added', 'success');
+                        clearForm();
+                        fetchMaintenanceSchedules();
+                    } else {
+                        showNotification(data.error || 'Failed to save schedule', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving schedule:', error);
+                    showNotification('Network error', 'error');
+                });
+        }
+
+        function editSchedule(id, machineName, maintenanceDate) {
+            document.getElementById('schedule_id').value = id;
+            document.getElementById('machine_name').value = machineName;
+            document.getElementById('maintenance_date').value = maintenanceDate;
+        }
+
+        function confirmCompletion(id) {
+            if (confirm('Confirm maintenance completion?')) {
+                fetch(`/api/complete_maintenance/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            showNotification('Maintenance marked as completed', 'success');
+                            fetchMaintenanceSchedules();
+                        } else {
+                            showNotification(data.error || 'Failed to mark as completed', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error completing maintenance:', error);
+                        showNotification('Network error', 'error');
+                    });
+            }
+        }
+
+        function cancelSchedule(id) {
+            if (confirm('Cancel this maintenance schedule?')) {
+                fetch(`/api/cancel_maintenance/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            showNotification('Maintenance canceled', 'success');
+                            fetchMaintenanceSchedules();
+                        } else {
+                            showNotification(data.error || 'Failed to cancel maintenance', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error canceling maintenance:', error);
+                        showNotification('Network error', 'error');
+                    });
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('maintenanceForm').reset();
+            document.getElementById('schedule_id').value = '';
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 4000);
+        }
+
+        // Initialize
+        document.getElementById('maintenanceForm').addEventListener('submit', saveSchedule);
+        fetchMachines();
+        fetchMaintenanceSchedules();
+    </script>
+</body>
+</html>

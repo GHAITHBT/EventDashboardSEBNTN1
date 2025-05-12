@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Dashboard</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a50c5;
+            --primary-light: #e9efff;
+            --secondary: #3a0ca3;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --warning: #f59e0b;
+            --warning-light: #fffbeb;
+            --info: #3b82f6;
+            --info-light: #eff6ff;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #f1f5f9;
+            --border: #e2e8f0;
+            --text-muted: #94a3b8;
+            --working-color: #10b981;
+            --offline-color: #94a3b8;
+            --downtime-color: #ef4444;
+            --maintenance-color: #f59e0b;
+            --breakdown-color: #fb923c;
+            --material-changes-color: #3b82f6;
+            --emergency-color: #8b5cf6;
+            --body-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --header-bg-start: #4361ee;
+            --header-bg-end: #3a0ca3;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --transition: all 0.3s ease;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--body-bg);
+            color: var(--dark);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end));
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo img {
+            height: 38px;
+            width: auto;
+        }
+
+        .title-container h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+            height: calc(100vh - 80px);
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        /* Control Buttons */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        .control-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: white;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-refresh { background-color: var(--success); }
+        .btn-refresh:hover { background-color: #0ca678; }
+
+        .btn-stats { background-color: var(--info); }
+        .btn-stats:hover { background-color: #2563eb; }
+
+        .btn-analytics { background-color: var(--dark); }
+        .btn-analytics:hover { background-color: #0f172a; }
+
+        .btn-breakdown { background-color: var(--warning); }
+        .btn-breakdown:hover { background-color: #d97706; }
+
+        .btn-logout { background-color: var(--gray); }
+        .btn-logout:hover { background-color: #475569; }
+
+        .btn-power-cut { background-color: var(--danger); }
+        .btn-power-cut:hover { background-color: #dc2626; }
+
+        .btn-power-restore { background-color: var(--success); }
+        .btn-power-restore:hover { background-color: #0ca678; }
+
+        /* Button Container for Machine Card */
+        .button-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Machine Status Grid */
+        .machine-status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .machine-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .machine-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .machine-card h3 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: capitalize;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .status-working { background-color: var(--working-color); }
+        .status-offline { background-color: var(--offline-color); }
+        .status-downtime { background-color: var(--downtime-color); }
+        .status-maintenance { background-color: var(--maintenance-color); }
+        .status-breakdown { background-color: var(--breakdown-color); }
+        .status-material-changes { background-color: var(--material-changes-color); }
+        .status-emergency { background-color: var(--emergency-color); }
+
+        /* Tables */
+        .history-section, .maintenance-section {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .history-section h2, .maintenance-section h2 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .history-table, .maintenance-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .history-table th, .history-table td,
+        .maintenance-table th, .maintenance-table td {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .history-table th, .maintenance-table th {
+            background-color: var(--gray-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--gray);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+        }
+
+        .history-table tbody tr, .maintenance-table tbody tr {
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .history-table tbody tr:last-child, .maintenance-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .history-table tr:hover, .maintenance-table tr:hover {
+            background-color: var(--primary-light);
+            cursor: pointer;
+        }
+
+        .history-table td, .maintenance-table td {
+            color: var(--dark);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Alert */
+        .downtime-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--danger);
+            color: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            border: 5px solid rgba(255, 0, 0, 0.5);
+            z-index: 1000;
+            text-align: center;
+            display: none;
+            animation: pulse 1.2s infinite;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .downtime-alert.show {
+            display: block;
+        }
+
+        .downtime-alert h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .downtime-alert p {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+            70% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
+            100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        /* Modal Styles - Professional Redesign */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow: hidden;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-title-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: var(--radius-md);
+            font-size: 18px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background-color: var(--gray-light);
+            color: var(--dark);
+        }
+
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-footer {
+            padding: 16px 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            position: sticky;
+            bottom: 0;
+            background-color: var(--card-bg);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            z-index: 10;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray-light);
+            color: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e2e8f0;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 5px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: var(--dark);
+            font-size: 1rem;
+            word-break: break-word;
+            background-color: var(--gray-light);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-value.empty {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .detail-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: var(--radius-md);
+            padding: 8px 12px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: capitalize;
+            color: white;
+        }
+
+        .status-completed {
+            background-color: var(--success);
+        }
+
+        .status-ongoing {
+            background-color: var(--info);
+        }
+
+        .status-cancelled {
+            background-color: var(--danger);
+        }
+
+        .status-pending {
+            background-color: var(--warning);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+            border: 2px solid var(--gray-light);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray);
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                padding: 16px;
+            }
+            
+            .machine-status-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .button-group {
+                padding: 16px;
+            }
+            
+            .event-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+            
+            .history-table, .maintenance-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .modal-header {
+                padding: 16px 20px;
+            }
+            
+            .modal-body {
+                padding: 16px;
+            }
+            
+            .modal-footer {
+                padding: 12px 16px;
+            }
+            
+            .modal-title {
+                font-size: 1.1rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .control-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+                </div>
+                <div class="title-container">
+                    <h1>Event Dashboard</h1>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="{{ url_for('analytics_dashboard') }}" class="header-btn">Analytics</a>
+                <a href="{{ url_for('maintenance_management') }}" class="header-btn">Maintenance</a>
+                <a href="{{ url_for('manage_machines') }}" class="header-btn">Manage Machines</a>
+                <a href="{{ url_for('logout') }}" class="header-btn">Logout</a>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="machine-status-grid" id="machine-status-grid"></div>
+            <div class="history-section">
+                <h2>Last 10 Events</h2>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Event Type</th>
+                            <th>Machine</th>
+                            <th>Start User ID</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="event-history"></tbody>
+                </table>
+            </div>
+            <div class="maintenance-section">
+                <h2>Preventive Maintenance</h2>
+                <table class="maintenance-table">
+                    <thead>
+                        <tr>
+                            <th>Machine</th>
+                            <th>Maintenance Date</th>
+                            <th>Status</th>
+                            <th>Power Cut Sent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="maintenance-schedule"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div class="downtime-alert" id="downtime-alert">
+        <h2>Status Alert</h2>
+        <p id="downtime-machine"></p>
+    </div>
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <span class="modal-title-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    Event Details
+                </h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="event-details" id="event-details"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn btn-secondary" onclick="closeModal()">Close</button>
+                <button class="modal-btn btn-primary" onclick="confirmAction()">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const downtimeAlert = document.getElementById('downtime-alert');
+        const downtimeMachine = document.getElementById('downtime-machine');
+        const eventModal = document.getElementById('event-modal');
+        let alertTimeout = null;
+        let alertSound = null;
+        try {
+            alertSound = new Audio('{{ url_for("static", filename="alert.mp3") }}');
+        } catch (error) {
+            console.warn('Alert sound not loaded:', error);
+        }
+
+        const alertedMachines = new Map();
+        const previousStatuses = {};
+
+        function fetchMachineStatus() {
+            fetch('/api/available_machines')
+                .then(response => response.json())
+                .then(data => {
+                    const grid = document.getElementById('machine-status-grid');
+                    grid.innerHTML = '';
+                    data.machines.forEach(machine => {
+                        const card = document.createElement('div');
+                        card.className = 'machine-card';
+                        card.innerHTML = `
+                            <h3>${machine.machine_name}</h3>
+                            <span class="status-indicator status-${machine.status.replace('_', '-')}">
+                                ${machine.status.replace('_', ' ')}
+                            </span>
+                            <div class="button-container">
+                                <button class="control-btn btn-power-cut" onclick="triggerPowerCut('${machine.machine_name}')">Cut Power</button>
+                                <button class="control-btn btn-power-restore" onclick="triggerPowerRestore('${machine.machine_name}')">Power Restore</button>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+
+                        const previousStatus = previousStatuses[machine.machine_name] || 'unknown';
+                        const currentStatus = machine.status;
+
+                        const alertableStatuses = [
+                            'downtime',
+                            'maintenance',
+                            'breakdown',
+                            'material_changes',
+                            'emergency'
+                        ];
+
+                        const shouldTriggerAlert =
+                            (previousStatus === 'working' &&
+                             alertableStatuses.includes(currentStatus) &&
+                             currentStatus !== 'break') ||
+                            (alertableStatuses.includes(currentStatus) &&
+                             currentStatus !== 'break' &&
+                             alertedMachines.get(machine.machine_name) !== currentStatus);
+
+                        if (shouldTriggerAlert) {
+                            console.log(`Alert triggered for ${machine.machine_name}: ${previousStatus} -> ${currentStatus}`);
+                            showDowntimeAlert(machine.machine_name, currentStatus);
+                            alertedMachines.set(machine.machine_name, currentStatus);
+                        } else if (currentStatus === 'working' || currentStatus === 'offline') {
+                            if (alertedMachines.has(machine.machine_name)) {
+                                console.log(`Clearing alert for ${machine.machine_name}: now ${currentStatus}`);
+                                alertedMachines.delete(machine.machine_name);
+                                if (downtimeAlert.classList.contains('show') &&
+                                    downtimeMachine.textContent.includes(machine.machine_name)) {
+                                    downtimeAlert.classList.remove('show');
+                                    if (alertTimeout) clearTimeout(alertTimeout);
+                                }
+                            }
+                        }
+
+                        previousStatuses[machine.machine_name] = currentStatus;
+                    });
+                })
+                .catch(error => console.error('Error fetching machine status:', error));
+        }
+
+        function fetchRecentEvents() {
+            fetch('/api/recent_events')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('event-history');
+                    tbody.innerHTML = '';
+                    data.events.forEach(event => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${event.id}</td>
+                            <td>${event.event_type.replace('_', ' ').toUpperCase()}</td>
+                            <td>${event.machine}</td>
+                            <td>${event.start_user_id || 'N/A'}</td>
+                            <td>${event.status}</td>
+                        `;
+                        row.dataset.event = JSON.stringify(event);
+                        row.addEventListener('click', () => showEventDetails(event));
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching recent events:', error));
+        }
+
+        function fetchPreventiveMaintenance() {
+            fetch('/api/preventive_maintenance')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('maintenance-schedule');
+                    tbody.innerHTML = '';
+                    data.schedules.forEach(schedule => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${schedule.machine_name}</td>
+                            <td>${schedule.maintenance_date}</td>
+                            <td>${schedule.status.replace('_', ' ').toUpperCase()}</td>
+                            <td>${schedule.power_cut_sent ? 'Yes' : 'No'}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching maintenance schedules:', error));
+        }
+
+        function showEventDetails(event) {
+            const detailsContainer = document.getElementById('event-details');
+            
+            function createDetailItem(label, value, isFullWidth = false) {
+                const isEmpty = !value || value === '';
+                
+                const detailItem = document.createElement('div');
+                detailItem.className = `detail-item${isFullWidth ? ' full-width' : ''}`;
+                
+                detailItem.innerHTML = `
+                    <div class="detail-label">${label}</div>
+                    <div class="detail-value${isEmpty ? ' empty' : ''}">${isEmpty ? 'N/A' : value}</div>
+                `;
+                
+                return detailItem;
+            }
+            
+            detailsContainer.innerHTML = '';
+            
+            let statusClass = 'status-pending';
+            if (event.status === 'completed') statusClass = 'status-completed';
+            else if (event.status === 'ongoing') statusClass = 'status-ongoing';
+            else if (event.status === 'cancelled') statusClass = 'status-cancelled';
+            
+            const statusBadge = `<span class="status-badge ${statusClass}">${event.status}</span>`;
+            
+            detailsContainer.appendChild(createDetailItem('ID', event.id));
+            detailsContainer.appendChild(createDetailItem('Event Type', event.event_type.replace('_', ' ').toUpperCase()));
+            detailsContainer.appendChild(createDetailItem('Machine', event.machine));
+            detailsContainer.appendChild(createDetailItem('Status', statusBadge));
+            detailsContainer.appendChild(createDetailItem('Timestamp', new Date(event.timestamp).toLocaleString()));
+            detailsContainer.appendChild(createDetailItem('Duration', event.duration ? event.duration.toFixed(2) + ' seconds' : 'Ongoing'));
+            detailsContainer.appendChild(createDetailItem('Reason', event.reason, true));
+            detailsContainer.appendChild(createDetailItem('User ID', event.user_id));
+            detailsContainer.appendChild(createDetailItem('Start User ID', event.start_user_id));
+            detailsContainer.appendChild(createDetailItem('End User ID', event.end_user_id));
+            detailsContainer.appendChild(createDetailItem('Start Comment', event.start_comment, true));
+            detailsContainer.appendChild(createDetailItem('End Comment', event.end_comment, true));
+            detailsContainer.appendChild(createDetailItem('Cancel Reason', event.cancel_reason, true));
+            detailsContainer.appendChild(createDetailItem('Reaction Time', event.reaction_time ? event.reaction_time.toFixed(2) + ' seconds' : ''));
+            detailsContainer.appendChild(createDetailItem('Maintenance Arrival User ID', event.maintenance_arrival_user_id));
+            
+            eventModal.style.display = 'flex';
+        }
+
+        function confirmAction() {
+            alert('Event acknowledged');
+            closeModal();
+        }
+
+        function closeModal() {
+            eventModal.style.display = 'none';
+        }
+
+        function showDowntimeAlert(machineName, status) {
+            downtimeMachine.textContent = `Machine: ${machineName} - Status: ${status.toUpperCase()}`;
+            downtimeAlert.classList.add('show');
+            console.log(`Showing alert for ${machineName} - Status: ${status}`);
+            if (alertSound) {
+                alertSound.play().catch(error => console.warn('Error playing alert sound:', error));
+            }
+
+            if (alertTimeout) clearTimeout(alertTimeout);
+            alertTimeout = setTimeout(() => {
+                console.log(`Hiding alert for ${machineName}`);
+                downtimeAlert.classList.remove('show');
+                fetch('/api/available_machines')
+                    .then(response => response.json())
+                    .then(data => {
+                        const machine = data.machines.find(m => m.machine_name === machineName);
+                        if (machine && (machine.status === 'working' || machine.status === 'offline')) {
+                            alertedMachines.delete(machineName);
+                        }
+                    });
+            }, 10000);
+        }
+
+        function triggerPowerCut(machineName) {
+            if (confirm(`Are you sure you want to cut power to ${machineName}?`)) {
+                alert(`Power cut executed for ${machineName}`);
+                refreshDashboard();
+            }
+        }
+
+        function triggerPowerRestore(machineName) {
+            if (confirm(`Are you sure you want to restore power to ${machineName}?`)) {
+                alert(`Power restored for ${machineName}`);
+                refreshDashboard();
+            }
+        }
+
+        function refreshDashboard() {
+            fetchMachineStatus();
+            fetchRecentEvents();
+            fetchPreventiveMaintenance();
+        }
+
+        function showStats() {
+            alert('Stats feature coming soon!');
+        }
+
+        function triggerBreakdown() {
+            alert('Breakdown trigger feature coming soon!');
+        }
+
+        eventModal.addEventListener('click', (e) => {
+            if (e.target === eventModal) {
+                closeModal();
+            }
+        });
+
+        refreshDashboard();
+        setInterval(refreshDashboard, 2000);
+    </script>
+</body>
+</html>

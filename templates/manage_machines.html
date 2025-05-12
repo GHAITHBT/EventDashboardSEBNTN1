@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Machines</title>
+    <style>
+        :root {
+            --primary: #4a5ee5;
+            --primary-dark: #3a50c5;
+            --primary-light: #e9efff;
+            --secondary: #6b21a8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #f1f5f9;
+            --border: #e2e8f0;
+            --text-muted: #94a3b8;
+            --body-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --header-bg-start: #4a5ee5;
+            --header-bg-end: #6b21a8;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--body-bg);
+            color: var(--dark);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end));
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo img {
+            height: 38px;
+            width: auto;
+        }
+
+        .title-container h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .main-content {
+            padding: 20px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .machine-management {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        .machine-management h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray-light);
+            color: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .machine-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-top: 20px;
+        }
+
+        .machine-table th, .machine-table td {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .machine-table th {
+            background-color: var(--gray-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--gray);
+            font-size: 0.75rem;
+        }
+
+        .machine-table tbody tr {
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .machine-table tbody tr:hover {
+            background-color: var(--primary-light);
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 16px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .machine-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='sebn_tn_logo.png') }}" alt="SEBN TN Logo">
+                </div>
+                <div class="title-container">
+                    <h1>Manage Machines</h1>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="{{ url_for('admin_dashboard') }}" class="header-btn">Dashboard</a>
+                <a href="{{ url_for('analytics_dashboard') }}" class="header-btn">Analytics</a>
+                <a href="{{ url_for('maintenance_management') }}" class="header-btn">Maintenance</a>
+                <a href="{{ url_for('logout') }}" class="header-btn">Logout</a>
+            </div>
+        </header>
+        <main class="main-content">
+            <div class="machine-management">
+                <h2>Add/Edit Machine</h2>
+                <form id="machine-form">
+                    <input type="hidden" id="ip-address-original" name="ip_address_original">
+                    <div class="form-group">
+                        <label for="ip-address">IP Address</label>
+                        <input type="text" id="ip-address" name="ip_address" placeholder="e.g., 192.168.1.101" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="machine-name">Machine Name</label>
+                        <input type="text" id="machine-name" name="machine_name" placeholder="e.g., Machine1" required>
+                    </div>
+                    <div class="error-message" id="error-message"></div>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Save Machine</button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">Clear</button>
+                    </div>
+                </form>
+            </div>
+            <div class="machine-management">
+                <h2>Existing Machines</h2>
+                <table class="machine-table">
+                    <thead>
+                        <tr>
+                            <th>IP Address</th>
+                            <th>Machine Name</th>
+                            
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="machine-list"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script>
+        function resetForm() {
+            document.getElementById('machine-form').reset();
+            document.getElementById('ip-address-original').value = '';
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        function fetchMachines() {
+            fetch('/api/all_machines')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('machine-list');
+                    tbody.innerHTML = '';
+                    data.machines.forEach(machine => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${machine.ip_address || 'N/A'}</td>
+                            <td>${machine.machine_name || 'N/A'}</td>
+                           
+                            <td>
+                                <button class="btn btn-edit" onclick='editMachine("${machine.ip_address}", "${machine.machine_name}")'>Edit</button>
+                                <button class="btn btn-delete" onclick='deleteMachine("${machine.ip_address}")'>Delete</button>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching machines:', error);
+                    document.getElementById('error-message').textContent = 'Error loading machines';
+                    document.getElementById('error-message').style.display = 'block';
+                });
+        }
+
+        function editMachine(ipAddress, machineName) {
+            document.getElementById('ip-address').value = ipAddress || '';
+            document.getElementById('machine-name').value = machineName || '';
+            document.getElementById('ip-address-original').value = ipAddress || '';
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        function deleteMachine(ipAddress) {
+            if (confirm(`Are you sure you want to delete the machine with IP ${ipAddress}?`)) {
+                fetch(`/api/delete_machine/${ipAddress}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Machine deleted successfully');
+                        fetchMachines();
+                        resetForm();
+                    } else {
+                        document.getElementById('error-message').textContent = data.error;
+                        document.getElementById('error-message').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting machine:', error);
+                    document.getElementById('error-message').textContent = 'Error deleting machine';
+                    document.getElementById('error-message').style.display = 'block';
+                });
+            }
+        }
+
+        document.getElementById('machine-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ipAddress = document.getElementById('ip-address').value;
+            const machineName = document.getElementById('machine-name').value;
+            const ipAddressOriginal = document.getElementById('ip-address-original').value;
+
+            const data = {
+                ip_address: ipAddress,
+                machine_name: machineName
+            };
+
+            const url = ipAddressOriginal ? '/api/update_machine' : '/api/add_machine';
+            const method = ipAddressOriginal ? 'PUT' : 'POST';
+
+            if (ipAddressOriginal) {
+                data.ip_address_original = ipAddressOriginal;
+            }
+
+            fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(ipAddressOriginal ? 'Machine updated successfully' : 'Machine added successfully');
+                    fetchMachines();
+                    resetForm();
+                } else {
+                    document.getElementById('error-message').textContent = data.error;
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error saving machine:', error);
+                document.getElementById('error-message').textContent = 'Error saving machine';
+                document.getElementById('error-message').style.display = 'block';
+            });
+        });
+
+        fetchMachines();
+    </script>
+</body>
+</html>
