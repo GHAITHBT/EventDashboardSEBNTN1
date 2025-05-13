@@ -10,11 +10,11 @@
 </head>
 <style>
     :root {
-        --primary: #4361ee;
-        --secondary: #3a0ca3;
-        --success: #2ecc71;
-        --danger: #e74c3c;
-        --warning: #f39c12;
+        --primary: #1E40AF;
+        --secondary: #3B82F6;
+        --success: #10B981;
+        --danger: #EF4444;
+        --warning: #F59E0B;
         --info: #3498db;
         --light: #f8f9fa;
         --dark: #1e293b;
@@ -157,7 +157,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Maintenance Causes</h2>
                 <canvas id="breakdownCausesChart"></canvas>
             </div>
-            <div class="bg-white p- maintenance_arrival_user_id p-6 rounded-lg shadow-lg">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">User Activity Count</h2>
                 <canvas id="userActivityChart"></canvas>
             </div>
@@ -173,28 +173,25 @@
     </div>
 
     <script>
-        const chartColors = {
-            primary: ['#3B82F6', '#60A5FA', '#93C5FD', '#BFDBFE', '#DBEAFE'],
-            secondary: ['#EF4444', '#F87171', '#FCA5A5', '#FECACA', '#FEE2E2'],
-            accent: ['#10B981', '#34D399', '#6EE7B7', '#A7F3D0', '#D1FAE5'],
-            warning: ['#F59E0B', '#FBBF24', '#FCD34D', '#FDE68A', '#FEF3C7'],
-            info: ['#8B5CF6', '#A78BFA', '#C4B5FD', '#DDD6FE', '#EDE9FE']
-        };
+        // Define a new palette of distinct colors based on the edited image
+        const distinctColors = [
+            '#1E40AF', // Dark Blue
+            '#3B82F6', // Medium Blue
+            '#EF4444', // Red
+            '#10B981'  // Green
+        ];
 
         async function fetchAnalytics(startDate, endDate) {
             try {
-                const response = await fetch('http://10.110.30.15:1250/api/all_events');
+                const response = await fetch('http://localhost:1250/api/all_events');
                 if (!response.ok) throw new Error('Failed to fetch events data');
                 const data = await response.json();
                 let events = data.events || [];
 
-                // Correct field mappings
-                events = events.map(event => ({
-                    ...event,
-                    machine: event.duration, // "Machine1"
-                    timestamp: event.machine, // "Wed, 07 May 2025 08:43:55 GMT"
-                    duration: event.timestamp // "20.4165"
-                }));
+                // Filter out incomplete events (e.g., missing event_type or machine)
+                events = events.filter(
+                    event => event.event_type && event.machine && event.timestamp
+                );
 
                 // Filter events by date range
                 if (startDate && endDate) {
@@ -221,61 +218,97 @@
 
                 const totalDowntimePerMachine = events.reduce((acc, event) => {
                     const machine = event.machine;
-                    const duration = event.duration === 'None' ? 0 : parseFloat(event.duration) || 0;
+                    const duration = event.duration == null ? 0 : parseFloat(event.duration) || 0;
                     acc[machine] = acc[machine] || { machine, total_downtime: 0 };
                     acc[machine].total_downtime += duration / 3600; // Convert to hours
                     return acc;
                 }, {});
 
-                const downtimePerMachine = events.filter(event => event.event_type === 'downtime').reduce((acc, event) => {
-                    const machine = event.machine;
-                    acc[machine] = acc[machine] || { machine, downtime_count: 0 };
-                    acc[machine].downtime_count++;
-                    return acc;
-                }, {});
+                const downtimePerMachine = events
+                    .filter(event => event.event_type === 'downtime')
+                    .reduce((acc, event) => {
+                        const machine = event.machine;
+                        acc[machine] = acc[machine] || { machine, downtime_count: 0 };
+                        acc[machine].downtime_count++;
+                        return acc;
+                    }, {});
 
-                const canceledEvents = events.filter(event => event.cancel_reason || event.status === 'canceled').reduce((acc, event) => {
-                    const machine = event.machine;
-                    acc[machine] = acc[machine] || { machine, canceled_count: 0 };
-                    acc[machine].canceled_count++;
-                    return acc;
-                }, {});
+                const canceledEvents = events
+                    .filter(event => event.cancel_reason || event.status === 'canceled')
+                    .reduce((acc, event) => {
+                        const machine = event.machine;
+                        acc[machine] = acc[machine] || { machine, canceled_count: 0 };
+                        acc[machine].canceled_count++;
+                        return acc;
+                    }, {});
 
-                const avgDowntimeDuration = events.filter(event => event.duration && event.duration !== 'None' && event.event_type === 'downtime').reduce((acc, event) => {
-                    const machine = event.machine;
-                    acc[machine] = acc[machine] || { machine, avg_duration: 0, count: 0 };
-                    acc[machine].avg_duration += parseFloat(event.duration);
-                    acc[machine].count++;
-                    return acc;
-                }, {});
+                const avgDowntimeDuration = events
+                    .filter(
+                        event =>
+                            event.duration != null &&
+                            event.event_type === 'downtime'
+                    )
+                    .reduce((acc, event) => {
+                        const machine = event.machine;
+                        acc[machine] = acc[machine] || {
+                            machine,
+                            avg_duration: 0,
+                            count: 0
+                        };
+                        acc[machine].avg_duration += parseFloat(event.duration);
+                        acc[machine].count++;
+                        return acc;
+                    }, {});
                 Object.values(avgDowntimeDuration).forEach(item => {
                     item.avg_duration = item.count ? item.avg_duration / item.count : 0;
                 });
 
-                const breakdownCauses = events.filter(event => event.event_type === 'maintenance' && event.reason).reduce((acc, event) => {
-                    const type = event.reason; // Use reason as maintenance type
-                    acc[type] = acc[type] || { breakdown_type: type, count: 0 };
-                    acc[type].count++;
-                    return acc;
-                }, {});
+                const breakdownCauses = events
+                    .filter(
+                        event => event.event_type === 'maintenance' && event.breakdown
+                    )
+                    .reduce((acc, event) => {
+                        const type = event.breakdown;
+                        acc[type] = acc[type] || { breakdown_type: type, count: 0 };
+                        acc[type].count++;
+                        return acc;
+                    }, {});
 
                 const userActivity = events.reduce((acc, event) => {
                     const user = event.start_user_id || 'N/A';
-                    acc[user] = acc[user] || { user_id: user, event_count: 0, maintenance_count: 0 };
+                    acc[user] = acc[user] || {
+                        user_id: user,
+                        event_count: 0,
+                        maintenance_count: 0
+                    };
                     acc[user].event_count++;
-                    if (event.event_type === 'maintenance' && event.maintenance_arrival_user_id) {
+                    if (
+                        event.event_type === 'maintenance' &&
+                        event.maintenance_arrival_user_id
+                    ) {
                         acc[user].maintenance_count++;
                     }
                     return acc;
                 }, {});
 
-                const breakdownResolutionTime = events.filter(event => event.event_type === 'maintenance' && event.end_user_id && event.end_user_id !== 'N/A').reduce((acc, event) => {
-                    const type = event.reason;
-                    acc[type] = acc[type] || { breakdown_type: type, total_time: 0, count: 0 };
-                    acc[type].total_time += parseFloat(event.duration);
-                    acc[type].count++;
-                    return acc;
-                }, {});
+                const breakdownResolutionTime = events
+                    .filter(
+                        event =>
+                            event.event_type === 'maintenance' &&
+                            event.end_user_id &&
+                            event.end_user_id !== 'N/A'
+                    )
+                    .reduce((acc, event) => {
+                        const type = event.breakdown;
+                        acc[type] = acc[type] || {
+                            breakdown_type: type,
+                            total_time: 0,
+                            count: 0
+                        };
+                        acc[type].total_time += parseFloat(event.duration);
+                        acc[type].count++;
+                        return acc;
+                    }, {});
                 Object.values(breakdownResolutionTime).forEach(item => {
                     item.avg_time = item.count ? item.total_time / item.count : 0;
                 });
@@ -288,22 +321,73 @@
                 }, {});
 
                 const kpis = {
-                    availability_rate: events.length ? (1 - (events.filter(e => e.event_type === 'downtime' || e.event_type === 'maintenance').length / events.length)) * 100 : 0,
-                    failure_rate: events.length ? events.filter(e => e.event_type === 'maintenance').length / (events.length / 24) : 0,
-                    mttr: events.filter(e => e.end_user_id && e.end_user_id !== 'N/A').length ? events.reduce((sum, e) => sum + (parseFloat(e.duration) || 0), 0) / events.filter(e => e.end_user_id && e.end_user_id !== 'N/A').length : 0,
-                    mtbf: events.filter(e => e.event_type === 'maintenance').length ? (events.length / events.filter(e => e.event_type === 'maintenance').length) / 3600 : 0
+                    availability_rate: events.length
+                        ? (1 -
+                              events.filter(
+                                  e =>
+                                      e.event_type === 'downtime' ||
+                                      e.event_type === 'maintenance'
+                              ).length /
+                                  events.length) *
+                          100
+                        : 0,
+                    failure_rate: events.length
+                        ? events.filter(e => e.event_type === 'maintenance').length /
+                          (events.length / 24)
+                        : 0,
+                    mttr: events.filter(
+                        e => e.end_user_id && e.end_user_id !== 'N/A'
+                    ).length
+                        ? events.reduce(
+                              (sum, e) => sum + (parseFloat(e.duration) || 0),
+                              0
+                          ) /
+                          events.filter(
+                              e => e.end_user_id && e.end_user_id !== 'N/A'
+                          ).length
+                        : 0,
+                    mtbf: events.filter(e => e.event_type === 'maintenance').length
+                        ? (events.length /
+                              events.filter(e => e.event_type === 'maintenance')
+                                  .length) /
+                          3600
+                        : 0
                 };
 
-                const mostCommonEventType = Object.values(eventsByType).reduce((max, item) => item.event_count > (max.event_count || 0) ? item : max, {}).event_type || 'N/A';
-                const mostActiveUser = Object.values(userActivity).reduce((max, item) => item.event_count > (max.event_count || 0) ? item : max, {}).user_id || 'N/A';
-                const topResolver = events.filter(e => e.end_user_id && e.end_user_id !== 'N/A').reduce((acc, e) => {
-                    const resolver = e.end_user_id;
-                    acc[resolver] = acc[resolver] || { resolver_id: resolver, resolve_count: 0 };
-                    acc[resolver].resolve_count++;
-                    return acc;
-                }, {});
-                const topResolverId = Object.values(topResolver).reduce((max, item) => item.resolve_count > (max.resolve_count || 0) ? item : max, {}).resolver_id || 'N/A';
-                const mostCommonBreakdownType = Object.values(breakdownCauses).reduce((max, item) => item.count > (max.count || 0) ? item : max, {}).breakdown_type || 'N/A';
+                const mostCommonEventType =
+                    Object.values(eventsByType).reduce(
+                        (max, item) =>
+                            item.event_count > (max.event_count || 0) ? item : max,
+                        {}
+                    ).event_type || 'N/A';
+                const mostActiveUser =
+                    Object.values(userActivity).reduce(
+                        (max, item) =>
+                            item.event_count > (max.event_count || 0) ? item : max,
+                        {}
+                    ).user_id || 'N/A';
+                const topResolver = events
+                    .filter(e => e.end_user_id && e.end_user_id !== 'N/A')
+                    .reduce((acc, e) => {
+                        const resolver = e.end_user_id;
+                        acc[resolver] = acc[resolver] || {
+                            resolver_id: resolver,
+                            resolve_count: 0
+                        };
+                        acc[resolver].resolve_count++;
+                        return acc;
+                    }, {});
+                const topResolverId =
+                    Object.values(topResolver).reduce(
+                        (max, item) =>
+                            item.resolve_count > (max.resolve_count || 0) ? item : max,
+                        {}
+                    ).resolver_id || 'N/A';
+                const mostCommonBreakdownType =
+                    Object.values(breakdownCauses).reduce(
+                        (max, item) => (item.count > (max.count || 0) ? item : max),
+                        {}
+                    ).breakdown_type || 'N/A';
 
                 const analytics = {
                     raw_events: events,
@@ -332,11 +416,13 @@
             }
         }
 
-        function createHorizontalBarChart(ctx, labels, data, label, colors = chartColors.primary) {
+        function createHorizontalBarChart(ctx, labels, data, label) {
             if (!data || !data.length) {
                 ctx.fillText('No Data Available', 10, 50);
                 return null;
             }
+            const backgroundColors = labels.map((_, index) => distinctColors[index % distinctColors.length]);
+            const borderColors = backgroundColors.map(color => color.replace('#', ''));
             return new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -344,8 +430,8 @@
                     datasets: [{
                         label: label,
                         data: data,
-                        backgroundColor: colors[0],
-                        borderColor: colors[0],
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors.map(color => `#${color}`),
                         borderWidth: 1
                     }]
                 },
@@ -373,6 +459,13 @@
                 ctx.fillText('No Data Available', 10, 50);
                 return null;
             }
+            const backgroundColors = labels.map((label, index) => {
+                if (label === 'downtime') return distinctColors[0]; // Dark Blue
+                if (label === 'break') return distinctColors[2];    // Red
+                if (label === 'maintenance') return distinctColors[3]; // Green
+                return distinctColors[index % distinctColors.length];
+            });
+            const borderColors = backgroundColors.map(color => color.replace('#', ''));
             return new Chart(ctx, {
                 type: 'doughnut',
                 data: {
@@ -380,8 +473,8 @@
                     datasets: [{
                         label: label,
                         data: data,
-                        backgroundColor: chartColors.primary,
-                        borderColor: chartColors.primary.map(color => color.replace('0.7', '1')),
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors.map(color => `#${color}`),
                         borderWidth: 1
                     }]
                 },
@@ -394,11 +487,13 @@
             });
         }
 
-        function createBarChart(ctx, labels, data, label, colors = chartColors.accent) {
+        function createBarChart(ctx, labels, data, label) {
             if (!data || !data.length) {
                 ctx.fillText('No Data Available', 10, 50);
                 return null;
             }
+            const backgroundColors = labels.map((_, index) => distinctColors[index % distinctColors.length]);
+            const borderColors = backgroundColors.map(color => color.replace('#', ''));
             return new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -406,8 +501,8 @@
                     datasets: [{
                         label: label,
                         data: data,
-                        backgroundColor: colors[0],
-                        borderColor: colors[0],
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors.map(color => `#${color}`),
                         borderWidth: 1
                     }]
                 },
@@ -433,32 +528,66 @@
             const analytics = await fetchAnalytics(startDate, endDate);
 
             // Update Cards
-            document.getElementById('totalEvents').textContent = analytics.events_per_machine?.reduce((sum, item) => sum + (item.event_count || 0), 0) || 0;
-            document.getElementById('totalDowntime').textContent = (analytics.total_downtime_per_machine?.reduce((sum, item) => sum + (item.total_downtime || 0), 0) || 0).toFixed(2);
-            document.getElementById('canceledEvents').textContent = analytics.canceled_events?.reduce((sum, item) => sum + (item.canceled_count || 0), 0) || 0;
-            document.getElementById('avgDowntime').textContent = analytics.avg_downtime_duration?.length ? 
-                (analytics.avg_downtime_duration.reduce((sum, item) => sum + (item.avg_duration || 0), 0) / analytics.avg_downtime_duration.length).toFixed(2) : 0;
-            document.getElementById('availabilityRate').textContent = (analytics.kpis?.availability_rate || 0).toFixed(2);
-            document.getElementById('failureRate').textContent = (analytics.kpis?.failure_rate || 0).toFixed(2);
-            document.getElementById('mttr').textContent = (analytics.kpis?.mttr || 0).toFixed(2);
-            document.getElementById('mtbf').textContent = (analytics.kpis?.mtbf || 0).toFixed(2);
-            document.getElementById('mostCommonEventType').textContent = analytics.most_common_event_type || 'N/A';
-            document.getElementById('mostActiveUser').textContent = analytics.most_active_user || 'N/A';
-            document.getElementById('topResolver').textContent = analytics.top_resolver || 'N/A';
-            document.getElementById('mostCommonBreakdownType').textContent = analytics.most_common_breakdown_type || 'N/A';
+            document.getElementById('totalEvents').textContent =
+                analytics.events_per_machine?.reduce(
+                    (sum, item) => sum + (item.event_count || 0),
+                    0
+                ) || 0;
+            document.getElementById('totalDowntime').textContent = (
+                analytics.total_downtime_per_machine?.reduce(
+                    (sum, item) => sum + (item.total_downtime || 0),
+                    0
+                ) || 0
+            ).toFixed(2);
+            document.getElementById('canceledEvents').textContent =
+                analytics.canceled_events?.reduce(
+                    (sum, item) => sum + (item.canceled_count || 0),
+                    0
+                ) || 0;
+            document.getElementById('avgDowntime').textContent = analytics.avg_downtime_duration?.length
+                ? (
+                      analytics.avg_downtime_duration.reduce(
+                          (sum, item) => sum + (item.avg_duration || 0),
+                          0
+                      ) / analytics.avg_downtime_duration.length
+                  ).toFixed(2)
+                : 0;
+            document.getElementById('availabilityRate').textContent = (
+                analytics.kpis?.availability_rate || 0
+            ).toFixed(2);
+            document.getElementById('failureRate').textContent = (
+                analytics.kpis?.failure_rate || 0
+            ).toFixed(2);
+            document.getElementById('mttr').textContent = (
+                analytics.kpis?.mttr || 0
+            ).toFixed(2);
+            document.getElementById('mtbf').textContent = (
+                analytics.kpis?.mtbf || 0
+            ).toFixed(2);
+            document.getElementById('mostCommonEventType').textContent =
+                analytics.most_common_event_type || 'N/A';
+            document.getElementById('mostActiveUser').textContent =
+                analytics.most_active_user || 'N/A';
+            document.getElementById('topResolver').textContent =
+                analytics.top_resolver || 'N/A';
+            document.getElementById('mostCommonBreakdownType').textContent =
+                analytics.most_common_breakdown_type || 'N/A';
 
             // Total Events per Machine
-            const eventsPerMachineCtx = document.getElementById('eventsPerMachineChart').getContext('2d');
+            const eventsPerMachineCtx = document
+                .getElementById('eventsPerMachineChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 eventsPerMachineCtx,
                 analytics.events_per_machine?.map(item => item.machine) || [],
                 analytics.events_per_machine?.map(item => item.event_count || 0) || [],
-                'Event Count',
-                chartColors.primary
+                'Event Count'
             );
 
             // Events by Type
-            const eventsByTypeCtx = document.getElementById('eventsByTypeChart').getContext('2d');
+            const eventsByTypeCtx = document
+                .getElementById('eventsByTypeChart')
+                .getContext('2d');
             createDoughnutChart(
                 eventsByTypeCtx,
                 analytics.events_by_type?.map(item => item.event_type) || [],
@@ -467,47 +596,53 @@
             );
 
             // Total Downtime per Machine
-            const totalDowntimeCtx = document.getElementById('totalDowntimeChart').getContext('2d');
+            const totalDowntimeCtx = document
+                .getElementById('totalDowntimeChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 totalDowntimeCtx,
                 analytics.total_downtime_per_machine?.map(item => item.machine) || [],
                 analytics.total_downtime_per_machine?.map(item => item.total_downtime || 0) || [],
-                'Total Downtime (hours)',
-                chartColors.secondary
+                'Total Downtime (hours)'
             );
 
             // Downtime Events per Machine
-            const downtimePerMachineCtx = document.getElementById('downtimePerMachineChart').getContext('2d');
+            const downtimePerMachineCtx = document
+                .getElementById('downtimePerMachineChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 downtimePerMachineCtx,
                 analytics.downtime_per_machine?.map(item => item.machine) || [],
                 analytics.downtime_per_machine?.map(item => item.downtime_count || 0) || [],
-                'Downtime Events',
-                chartColors.accent
+                'Downtime Events'
             );
 
             // Canceled Events per Machine
-            const canceledEventsCtx = document.getElementById('canceledEventsChart').getContext('2d');
+            const canceledEventsCtx = document
+                .getElementById('canceledEventsChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 canceledEventsCtx,
                 analytics.canceled_events?.map(item => item.machine) || [],
                 analytics.canceled_events?.map(item => item.canceled_count || 0) || [],
-                'Canceled Events',
-                chartColors.warning
+                'Canceled Events'
             );
 
             // Average Downtime Duration
-            const avgDowntimeDurationCtx = document.getElementById('avgDowntimeDurationChart').getContext('2d');
+            const avgDowntimeDurationCtx = document
+                .getElementById('avgDowntimeDurationChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 avgDowntimeDurationCtx,
                 analytics.avg_downtime_duration?.map(item => item.machine) || [],
                 analytics.avg_downtime_duration?.map(item => item.avg_duration || 0) || [],
-                'Average Duration (seconds)',
-                chartColors.accent
+                'Average Duration (seconds)'
             );
 
             // Maintenance Causes
-            const breakdownCausesCtx = document.getElementById('breakdownCausesChart').getContext('2d');
+            const breakdownCausesCtx = document
+                .getElementById('breakdownCausesChart')
+                .getContext('2d');
             createDoughnutChart(
                 breakdownCausesCtx,
                 analytics.breakdown_causes?.map(item => item.breakdown_type) || [],
@@ -516,33 +651,36 @@
             );
 
             // User Activity Count
-            const userActivityCtx = document.getElementById('userActivityChart').getContext('2d');
+            const userActivityCtx = document
+                .getElementById('userActivityChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 userActivityCtx,
                 analytics.user_activity?.map(item => item.user_id) || [],
                 analytics.user_activity?.map(item => item.event_count || 0) || [],
-                'Event Count',
-                chartColors.info
+                'Event Count'
             );
 
             // Maintenance Resolution Time
-            const breakdownResolutionTimeCtx = document.getElementById('breakdownResolutionTimeChart').getContext('2d');
+            const breakdownResolutionTimeCtx = document
+                .getElementById('breakdownResolutionTimeChart')
+                .getContext('2d');
             createHorizontalBarChart(
                 breakdownResolutionTimeCtx,
                 analytics.breakdown_resolution_time?.map(item => item.breakdown_type) || [],
                 analytics.breakdown_resolution_time?.map(item => item.avg_time || 0) || [],
-                'Average Resolution Time (seconds)',
-                chartColors.secondary
+                'Average Resolution Time (seconds)'
             );
 
             // Daily Event Distribution
-            const dailyEventDistributionCtx = document.getElementById('dailyEventDistributionChart').getContext('2d');
+            const dailyEventDistributionCtx = document
+                .getElementById('dailyEventDistributionChart')
+                .getContext('2d');
             createBarChart(
                 dailyEventDistributionCtx,
                 analytics.daily_event_distribution?.map(item => item.date) || [],
                 analytics.daily_event_distribution?.map(item => item.event_count || 0) || [],
-                'Event Count',
-                chartColors.accent
+                'Event Count'
             );
 
             // Store analytics for export
@@ -567,7 +705,7 @@
             // Define professional styles
             const titleStyle = {
                 font: { name: 'Calibri', sz: 18, bold: true, color: { rgb: "FFFFFF" } },
-                fill: { fgColor: { rgb: "4361EE" } },
+                fill: { fgColor: { rgb: "1E40AF" } },
                 alignment: { horizontal: "center", vertical: "center" },
                 border: {
                     top: { style: "medium", color: { rgb: "000000" } },
@@ -579,7 +717,7 @@
 
             const headerStyle = {
                 font: { name: 'Calibri', sz: 12, bold: true, color: { rgb: "FFFFFF" } },
-                fill: { fgColor: { rgb: "3A0CA3" } },
+                fill: { fgColor: { rgb: "3B82F6" } },
                 alignment: { horizontal: "center", vertical: "center", wrapText: true },
                 border: {
                     top: { style: "thin", color: { rgb: "000000" } },
@@ -602,7 +740,7 @@
 
             const altRowStyle = {
                 font: { name: 'Calibri', sz: 11 },
-                fill: { fgColor: { rgb: "E6F0FA" } }, // Light blue for alternating rows
+                fill: { fgColor: { rgb: "E6F0FA" } },
                 border: {
                     top: { style: "thin", color: { rgb: "000000" } },
                     bottom: { style: "thin", color: { rgb: "000000" } },
@@ -614,7 +752,7 @@
 
             const highlightStyle = {
                 font: { name: 'Calibri', sz: 11, bold: true },
-                fill: { fgColor: { rgb: "FECACA" } }, // Light red for highlighting
+                fill: { fgColor: { rgb: "FECACA" } },
                 border: {
                     top: { style: "thin", color: { rgb: "000000" } },
                     bottom: { style: "thin", color: { rgb: "000000" } },
@@ -625,19 +763,33 @@
             };
 
             // Sheet 1: Raw Events
-            const eventHeaders = ['ID', 'Event Type', 'Machine', 'Timestamp', 'Duration (sec)', 'Start User ID', 'Maintenance Arrival User ID', 'End User ID (Resolver)', 'Reason (Maintenance Type)', 'Cancel Reason', 'Status', 'Start Comment', 'End Comment'];
+            const eventHeaders = [
+                'ID',
+                'Event Type',
+                'Machine',
+                'Timestamp',
+                'Duration (sec)',
+                'Start User ID',
+                'Maintenance Arrival User ID',
+                'End User ID (Resolver)',
+                'Breakdown (Maintenance Type)',
+                'Cancel Reason',
+                'Status',
+                'Start Comment',
+                'End Comment'
+            ];
             const eventData = analytics.raw_events?.map(event => [
                 event.id,
-                event.event_type,
-                event.machine,
-                event.duration === 'None' ? 0 : parseFloat(event.duration) || 0,
-                event.timestamp,
+                event.event_type || 'N/A',
+                event.machine || 'N/A',
+                event.timestamp || 'N/A',
+                event.duration == null ? 0 : parseFloat(event.duration) || 0,
                 event.start_user_id || 'N/A',
                 event.maintenance_arrival_user_id || 'N/A',
                 event.end_user_id || 'N/A',
-                event.reason || 'N/A',
+                event.breakdown || 'N/A',
                 event.cancel_reason || 'N/A',
-                event.status,
+                event.status || 'N/A',
                 event.start_comment || 'N/A',
                 event.end_comment || 'N/A'
             ]) || [];
@@ -655,7 +807,9 @@
                 { s: { r: 0, c: 0 }, e: { r: 0, c: eventHeaders.length - 1 } },
                 { s: { r: 1, c: 0 }, e: { r: 1, c: eventHeaders.length - 1 } }
             ];
-            eventWs['!cols'] = eventHeaders.map((_, i) => ({ wch: i === 3 || i === 8 || i === 11 || i === 12 ? 30 : 15 }));
+            eventWs['!cols'] = eventHeaders.map((_, i) =>
+                i === 3 || i === 8 || i === 11 || i === 12 ? { wch: 30 } : { wch: 15 }
+            );
             eventWs['!rows'] = [{ hpt: 30 }, { hpt: 20 }];
 
             // Apply styles for events sheet
@@ -668,9 +822,19 @@
             eventData.forEach((row, idx) => {
                 const rowNum = idx + 4;
                 const isCanceled = row[10] === 'canceled';
-                const duration = row[3];
-                const style = isCanceled ? highlightStyle : (duration > 3600 ? { ...dataStyle, fill: { fgColor: { rgb: "FEF3C7" } } } : (rowNum % 2 === 0 ? altRowStyle : dataStyle));
-                applyCellStyle(eventWs, { s: { r: rowNum, c: 0 }, e: { r: rowNum, c: eventHeaders.length - 1 } }, style);
+                const duration = row[4];
+                const style = isCanceled
+                    ? highlightStyle
+                    : duration > 3600
+                    ? { ...dataStyle, fill: { fgColor: { rgb: "FEF3C7" } } }
+                    : rowNum % 2 === 0
+                    ? altRowStyle
+                    : dataStyle;
+                applyCellStyle(
+                    eventWs,
+                    { s: { r: rowNum, c: 0 }, e: { r: rowNum, c: eventHeaders.length - 1 } },
+                    style
+                );
             });
 
             // Freeze panes
@@ -711,8 +875,17 @@
             userData.forEach((row, idx) => {
                 const rowNum = idx + 4;
                 const eventCount = row[1];
-                const style = eventCount > 10 ? { ...dataStyle, fill: { fgColor: { rgb: "D1FAE5" } } } : (rowNum % 2 === 0 ? altRowStyle : dataStyle);
-                applyCellStyle(userWs, { s: { r: rowNum, c: 0 }, e: { r: rowNum, c: userHeaders.length - 1 } }, style);
+                const style =
+                    eventCount > 10
+                        ? { ...dataStyle, fill: { fgColor: { rgb: "D1FAE5" } } }
+                        : rowNum % 2 === 0
+                        ? altRowStyle
+                        : dataStyle;
+                applyCellStyle(
+                    userWs,
+                    { s: { r: rowNum, c: 0 }, e: { r: rowNum, c: userHeaders.length - 1 } },
+                    style
+                );
             });
 
             // Freeze panes
@@ -722,10 +895,40 @@
             // Sheet 3: Aggregated Metrics
             const metricHeaders = ['Metric', 'Value'];
             const metricData = [
-                ['Total Events', analytics.events_per_machine?.reduce((sum, item) => sum + (item.event_count || 0), 0) || 0],
-                ['Total Downtime (hrs)', (analytics.total_downtime_per_machine?.reduce((sum, item) => sum + (item.total_downtime || 0), 0) || 0).toFixed(2)],
-                ['Canceled Events', analytics.canceled_events?.reduce((sum, item) => sum + (item.canceled_count || 0), 0) || 0],
-                ['Avg Downtime (sec)', analytics.avg_downtime_duration?.length ? (analytics.avg_downtime_duration.reduce((sum, item) => sum + (item.avg_duration || 0), 0) / analytics.avg_downtime_duration.length).toFixed(2) : 0],
+                [
+                    'Total Events',
+                    analytics.events_per_machine?.reduce(
+                        (sum, item) => sum + (item.event_count || 0),
+                        0
+                    ) || 0
+                ],
+                [
+                    'Total Downtime (hrs)',
+                    (
+                        analytics.total_downtime_per_machine?.reduce(
+                            (sum, item) => sum + (item.total_downtime || 0),
+                            0
+                        ) || 0
+                    ).toFixed(2)
+                ],
+                [
+                    'Canceled Events',
+                    analytics.canceled_events?.reduce(
+                        (sum, item) => sum + (item.canceled_count || 0),
+                        0
+                    ) || 0
+                ],
+                [
+                    'Avg Downtime (sec)',
+                    analytics.avg_downtime_duration?.length
+                        ? (
+                              analytics.avg_downtime_duration.reduce(
+                                  (sum, item) => sum + (item.avg_duration || 0),
+                                  0
+                              ) / analytics.avg_downtime_duration.length
+                          ).toFixed(2)
+                        : 0
+                ],
                 ['Availability Rate (%)', (analytics.kpis?.availability_rate || 0).toFixed(2)],
                 ['Failure Rate (per hr)', (analytics.kpis?.failure_rate || 0).toFixed(2)],
                 ['MTTR (sec)', (analytics.kpis?.mttr || 0).toFixed(2)],
@@ -742,7 +945,7 @@
                 [],
                 metricHeaders,
                 ...metricData
-            ]);
+           ]);
 
             // Merge cells for title and subtitle
             metricWs['!merges'] = [
@@ -762,10 +965,19 @@
             metricData.forEach((row, idx) => {
                 const rowNum = idx + 4;
                 const value = parseFloat(row[1]);
-                const style = (row[0] === 'Total Downtime (hrs)' && value > 10) ? { ...dataStyle, fill: { fgColor: { rgb: "FEF3C7" } } } : 
-                             (row[0] === 'Availability Rate (%)' && value < 90) ? { ...dataStyle, fill: { fgColor: { rgb: "FECACA" } } } :
-                             (rowNum % 2 === 0 ? altRowStyle : dataStyle);
-                applyCellStyle(metricWs, { s: { r: rowNum, c: 0 }, e: { r: rowNum, c: metricHeaders.length - 1 } }, style);
+                const style =
+                    row[0] === 'Total Downtime (hrs)' && value > 10
+                        ? { ...dataStyle, fill: { fgColor: { rgb: "FEF3C7" } } }
+                        : row[0] === 'Availability Rate (%)' && value < 90
+                        ? { ...dataStyle, fill: { fgColor: { rgb: "FECACA" } } }
+                        : rowNum % 2 === 0
+                        ? altRowStyle
+                        : dataStyle;
+                applyCellStyle(
+                    metricWs,
+                    { s: { r: rowNum, c: 0 }, e: { r: rowNum, c: metricHeaders.length - 1 } },
+                    style
+                );
             });
 
             // Freeze panes
@@ -774,7 +986,7 @@
 
             // Generate and download the Excel file
             const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
-            const s2ab = (s) => {
+            const s2ab = s => {
                 const buf = new ArrayBuffer(s.length);
                 const view = new Uint8Array(buf);
                 for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;

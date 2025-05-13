@@ -754,16 +754,15 @@ def get_all_events():
             SELECT *
             FROM event_logs
             ORDER BY timestamp DESC
-           
         """)
         events = cursor.fetchall()
         event_list = [
             {
                 "id": e[0],
                 "event_type": e[1],
-                "machine": e[2],
-                "timestamp": str(e[3]),
-                "duration": e[4],
+                "timestamp": str(e[2]),
+                "duration": e[3],
+                "machine": e[4],
                 "start_user_id": e[5],
                 "end_user_id": e[6],
                 "start_comment": e[7],
@@ -772,8 +771,9 @@ def get_all_events():
                 "status": e[10],
                 "reaction_time": e[11],
                 "maintenance_arrival_user_id": e[12],
-                "user_id": e[13],
-                "reason": e[14]
+                "breakdown": e[13],
+                "user_id": e[14],
+                "reason": e[15]
             } for e in events
         ]
         return jsonify({"events": event_list})
