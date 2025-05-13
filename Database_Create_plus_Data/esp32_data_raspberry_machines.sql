@@ -40,7 +40,7 @@ CREATE TABLE `raspberry_machines` (
 
 LOCK TABLES `raspberry_machines` WRITE;
 /*!40000 ALTER TABLE `raspberry_machines` DISABLE KEYS */;
-INSERT INTO `raspberry_machines` VALUES ('10.110.21.34','Machine1',NULL,NULL,'offline'),('10.110.23.135','Machine8','2025-04-15','testing ','offline'),('132','Machine7',NULL,NULL,'offline'),('192.168.1.101','Machine2',NULL,NULL,'offline'),('192.168.1.102','Machine2',NULL,NULL,'offline'),('4','Machine4',NULL,NULL,'offline'),('5','Machine6',NULL,NULL,'offline');
+INSERT INTO `raspberry_machines` VALUES ('10.110.21.34','Machine1',NULL,NULL,'offline'),('10.110.23.135','Machine8','2025-04-15','testing ','offline'),('132','Machine7',NULL,NULL,'offline'),('192.168.1.101','Machine2','2025-06-17',NULL,'offline'),('192.168.1.102','Machine3','2025-06-22',NULL,'offline'),('4','Machine4',NULL,NULL,'offline'),('5','Machine6',NULL,NULL,'offline');
 /*!40000 ALTER TABLE `raspberry_machines` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-12 14:21:07
+-- Dump completed on 2025-05-13 16:15:57

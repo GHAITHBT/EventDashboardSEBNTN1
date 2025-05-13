@@ -9946,3 +9946,8 @@ P/1.1" 200 -
 2025-05-13 16:12:49,365 - __main__ - ERROR - Database error pinging Raspberry Pis: 2003: Can't connect to MySQL server on '10.110.3.102:3306' (10065 Une opération a été tentée sur un hôte impossible à atteindre)
 2025-05-13 16:12:49,444 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
 2025-05-13 16:12:49,444 - __main__ - ERROR - Database error pinging Raspberry Pis: 2003: Can't connect to MySQL server on '10.110.3.102:3306' (10065 Une opération a été tentée sur un hôte impossible à atteindre)
+2025-05-13 16:13:14,707 - __main__ - ERROR - Error retrieving recent events: 2003: Can't connect to MySQL server on '10.110.3.102:3306' (10060 Une tentative de connexion a échoué car le parti connecté n’a pas répondu convenablement au-delà d’une certaine durée ou une connexion établie a échoué car l’hôte de connexion n’a pas répondu)
+2025-05-13 16:13:14,707 - __main__ - ERROR - Error retrieving machines: 2003: Can't connect to MySQL server on '10.110.3.102:3306' (10060 Une tentative de connexion a échoué car le parti connecté n’a pas répondu convenablement au-delà d’une certaine durée ou une connexion établie a échoué car l’hôte de connexion n’a pas répondu)
+2025-05-13 16:13:14,730 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:13:14] "[35m[1mGET /api/recent_events HTTP/1.1[0m" 500 -
+2025-05-13 16:13:14,730 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:13:14] "[35m[1mGET /api/available_machines HTTP/1.1[0m" 500 -
+2025-05-13 16:14:00,130 - __main__ - INFO - Initializing database connection

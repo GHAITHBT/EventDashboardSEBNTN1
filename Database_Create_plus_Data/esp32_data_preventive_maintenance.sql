@@ -32,7 +32,7 @@ CREATE TABLE `preventive_maintenance` (
   `last_notification` datetime DEFAULT NULL,
   `power_cut_sent` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `preventive_maintenance` (
 
 LOCK TABLES `preventive_maintenance` WRITE;
 /*!40000 ALTER TABLE `preventive_maintenance` DISABLE KEYS */;
-INSERT INTO `preventive_maintenance` VALUES (91,'Machine3','2025-04-25','completed','2025-04-22 09:41:15',0),(92,'Machine1','2025-04-25','completed','2025-05-01 09:53:24',0);
+INSERT INTO `preventive_maintenance` VALUES (91,'Machine3','2025-07-14','completed','2025-04-22 09:41:15',0),(92,'Machine1','2025-03-04','completed','2025-05-01 09:53:24',0),(93,'Machine2','2025-04-02','completed','2025-05-01 09:53:24',0),(94,'Machine6','2025-05-15','completed','2025-05-01 09:53:24',0),(95,'Machine4','2025-06-06','completed','2025-05-01 09:53:24',0),(96,'Machine5','2025-10-01','completed','2025-05-01 09:53:24',0);
 /*!40000 ALTER TABLE `preventive_maintenance` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-12 14:21:06
+-- Dump completed on 2025-05-13 16:15:59
