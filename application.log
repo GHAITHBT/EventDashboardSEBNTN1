@@ -8440,3 +8440,1509 @@ x00\x00\x00\x02\x00\x00\x00'
 2025-05-13 16:12:13,377 - __main__ - INFO - Database initialized successfully
 2025-05-13 16:12:13,401 - werkzeug - WARNING -  * Debugger is active!
 2025-05-13 16:12:13,409 - werkzeug - INFO -  * Debugger PIN: 513-908-511
+2025-05-13 16:12:15,146 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:15,151 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:15,200 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:15,219 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:15,219 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:15,219 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:15,223 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:15,224 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:15,224 - mysql.connector - DEBUG - # request: b'A\xf5i!2\x82\xcb}c8\xc7T\x11Z]$\x1b\xcd\xa0V' size: 20
+2025-05-13 16:12:15,226 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:15,226 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:15,226 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:15,243 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:15,244 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:15,249 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:15,249 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:15,251 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:15,254 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:15,395 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:15,401 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:15,442 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:15,465 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:15,465 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:15,465 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:15,474 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:15,475 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:15,475 - mysql.connector - DEBUG - # request: b'\xf5\x93\x8b\xdd\x0b\xed\xc7\x80\x9d\xeb\xee\xbe\xa2\xa5\x86\xdc\x9a{\xdc ' size: 20
+2025-05-13 16:12:15,480 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:15,480 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:15,501 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:15,501 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:15,501 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:15,501 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:15,501 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:15,506 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:15,508 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:17,940 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B715627E0>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:17,940 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B7162D0D0>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:17,940 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B7162E780>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:17,946 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:17,946 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:17,946 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,042 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,042 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,062 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,076 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,076 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,077 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,078 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,078 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,078 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,079 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,079 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,080 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,081 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,081 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,081 - mysql.connector - DEBUG - # request: b's\xbcc~\x05H\r\xa9\xed\xe9\x9e\x89aM\xee7\xe3\x1d0\xc0' size: 20
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - # request: b"\xd6\xfb'S\xcaG\x80:W\xbdcI\xc8L_\xb4HU\xfc\xbd" size: 20
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - # request: b'\xe6kiHl\xfd\x99\x19\xb0cn\xc2\xd8\x88\xd3\xc6\x90R\xcb\xb1' size: 20
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,082 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,087 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,087 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,092 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:18,103 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:18,105 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:18,211 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1D010>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:18,211 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1E210>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:18,212 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED65E3500>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:18,220 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,221 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,222 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,256 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729DCF50>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,256 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B7162CE00>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,256 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B71561F40>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,258 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729DEF30>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,281 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,282 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,282 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,282 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,345 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,374 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,388 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,396 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,396 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,396 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,396 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,396 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,396 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,400 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,400 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,400 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,402 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,403 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,403 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,403 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,403 - mysql.connector - DEBUG - # request: b'H\x86\xeb\x9c\x1eR\xc3h)\xf4\xbf,m\xd4\xc9 b\x94{\xec' size: 20
+2025-05-13 16:12:18,404 - mysql.connector - DEBUG - # request: b'L?\x17\xea\xb4ic\xbco\xcc\xe6\x01%\xa6\xcar\x7f\xecBM' size: 20
+2025-05-13 16:12:18,404 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,404 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,404 - mysql.connector - DEBUG - # request: b'\x8dBNc\xe8*\x0e\xcf\xeb\x1f\xdb\\\xd8_H\x12R\x1b\x85\x99' size: 20
+2025-05-13 16:12:18,406 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,406 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,406 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,406 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,407 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,408 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,429 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:18,432 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:18,434 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:18,447 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,447 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,447 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,463 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,475 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,475 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,475 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,475 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,475 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,482 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,483 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,483 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,483 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,483 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,484 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,484 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,485 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,485 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,485 - mysql.connector - DEBUG - # request: b'*4D5\x8c{\x11\xf6\xed\xd8\x04\xcb`\xeaJ:1\x8a\xa7\xbe' size: 20
+2025-05-13 16:12:18,486 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,486 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,487 - mysql.connector - DEBUG - # request: b'\xde\xdbQp\x8e\xb3B\xc2.AB\x86m\x1a\xfc\xbe\xe5i\xb3\x86' size: 20
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,488 - mysql.connector - DEBUG - # request: b'Aur\xe5\x97\xa3%\xd4\xe1,zY4~\x95\xd6J\xfd\x1f\xf6' size: 20
+2025-05-13 16:12:18,490 - mysql.connector - DEBUG - # request: b'\xea\xfd>[d\xf8\xc0\xac\xc9$\x80\xa0F\x92L=\x19\xae\xc8\xf2' size: 20
+2025-05-13 16:12:18,490 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,491 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,492 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,492 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,492 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,492 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,507 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:18,510 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:18,513 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:18,518 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:18,523 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1CC20>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,523 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED5326AB0>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,524 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1D460>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,524 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1DD00>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:18,531 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,531 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,531 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,531 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:18,631 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,677 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,696 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,696 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,696 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,708 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,708 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:18,708 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,708 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,719 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,720 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,722 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,722 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,722 - mysql.connector - DEBUG - # request: b'>R\xb98= \x8bm+]9\x83F\xe7\xc3qv(\x8e:' size: 20
+2025-05-13 16:12:18,722 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,722 - mysql.connector - DEBUG - # request: b'~\x07b|\x94\x8e\xd5\xa9\xf3\x06\xda\x174\xb2\xa7\xaa$r\xe7\xe6' size: 20
+2025-05-13 16:12:18,725 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,726 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,726 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,726 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,726 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,726 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:18,726 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,727 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,727 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:18,727 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:18,731 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,731 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:18,731 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,731 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:18,731 - mysql.connector - DEBUG - # request: b'e\xab\xee3Gd\xfd\x1e\xdc\xde\xac\xeb7\xeb8y\x8e:\x89\x89' size: 20
+2025-05-13 16:12:18,732 - mysql.connector - DEBUG - # request: b'\x95\x01\xc6\n\xa3R\x1a\xb2\xa6\x85cY\x8fl\xcbY&\xcaF\xc4' size: 20
+2025-05-13 16:12:18,735 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,735 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:18,735 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,735 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:18,744 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:18,746 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:18,748 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:18,754 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:20,528 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:20,528 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:20,563 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:20,613 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:20,623 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:20,623 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:20,626 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:20,627 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:20,628 - mysql.connector - DEBUG - # request: b'\xa0\x97\x08L\xe9\x94\xb4_\x8b+\xb8L\x85\xb1\xd7\x05G+;!' size: 20
+2025-05-13 16:12:20,631 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:20,631 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:20,645 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:20,649 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:20,651 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:20,653 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:20,655 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:20,657 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:20,659 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:20,765 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:20,771 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:20,825 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:20,847 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:20,847 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:20,848 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:20,853 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:20,853 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:20,853 - mysql.connector - DEBUG - # request: b"\x8b\xc9Y\x1cr/\xdb\x88\x10\xbc\xdc'\x9c>\x83\xc9\x1d\xda\x9b\x83" size: 20
+2025-05-13 16:12:20,856 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:20,856 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:20,873 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:20,877 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:20,877 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:20,877 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:20,877 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:20,885 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:20,887 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:23,340 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B71590F20>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:23,341 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B715928D0>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:23,341 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B729DCF80>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:23,346 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,346 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,346 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,509 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,509 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,509 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,515 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,515 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,515 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,522 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,522 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,522 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,523 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,523 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,523 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,524 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,525 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,525 - mysql.connector - DEBUG - # request: b'\xb3K\x01\xa5\x06<\xd0\x98\xc1`\x19Fz\x8e\xdb\xf8^\xe9\x1f\xb5' size: 20
+2025-05-13 16:12:23,526 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,527 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,528 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,528 - mysql.connector - DEBUG - # request: b'\x17`\xb3\xfc\xd3V\xda&\xc8mG\xbcL\x06d\xc5\xa1J\xb2\xfe' size: 20
+2025-05-13 16:12:23,528 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,529 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,529 - mysql.connector - DEBUG - # request: b'\xc8tc\xc9\x0c\x93;\xad\x9e\x13\x93\xf0\xb3\xfbV7\xc8\xe2"\xe0' size: 20
+2025-05-13 16:12:23,529 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,531 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,531 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,533 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,533 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,546 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:23,549 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:23,551 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:23,590 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1D550>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:23,591 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AF1370>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:23,591 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AF1820>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:23,596 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,596 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,596 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,657 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B71561130>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,658 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729DE9F0>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,660 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,660 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,708 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B71590C50>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,741 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B715936B0>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,757 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,790 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,790 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,790 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,807 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,808 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,812 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,812 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,815 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,815 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,815 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,818 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,818 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,818 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,819 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,819 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,819 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,820 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,820 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,820 - mysql.connector - DEBUG - # request: b'\x95t\x14\xe8\xb1\x02\xd5k\x00\x1c\xcf\x7fb\x89\xcc\x0b@\xf5f(' size: 20
+2025-05-13 16:12:23,822 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,823 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,823 - mysql.connector - DEBUG - # request: b'\xdeB\x7f\xff\x19\x83\x84\xe56Q69\xaf\\\x1a\x05\xd6\xf6@\xc9' size: 20
+2025-05-13 16:12:23,812 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,823 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,823 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,823 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,824 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,824 - mysql.connector - DEBUG - # request: b'\x82Lz\x04c\x01\x12\x8d\xf6\x10\x1d%]\xc3o\x90\xf9qC\xd9' size: 20
+2025-05-13 16:12:23,825 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,826 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,827 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,827 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,823 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,831 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,831 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,841 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:23,842 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:23,843 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,845 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:23,853 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,874 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,874 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:23,874 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - # request: b'\xf3]\x99\xe2\x1c\xa7D\x92\xae\xe0M\x9fe\xa6\x8a\xe4\xec\x88Y\x1f' size: 20
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - # request: b'K2\xce\x10\xda\xc8j\x16v\x85\x9b\xce\x9fil\xfd\x92\x13r\x0c' size: 20
+2025-05-13 16:12:23,875 - mysql.connector - DEBUG - # request: b'M\x95\x8d\xb4\xe6^w\xc8\x92\xf0pf\xd5)O\xce\xd7\x1c\xd8+' size: 20
+2025-05-13 16:12:23,879 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,880 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,880 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,880 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,881 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,881 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,883 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:23,884 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:23,884 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:23,888 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:23,888 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:23,888 - mysql.connector - DEBUG - # request: b'\x8b\x024\xb0\x062\xb4_\xdf=\xad\x10\x90-\x7f\n\xbe\xef\xf7\xb3' size: 20
+2025-05-13 16:12:23,891 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1FF50>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,891 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AF0170>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,892 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1E7E0>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,892 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1E0C0>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:23,893 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:23,893 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:23,895 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:23,898 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,898 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,898 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,898 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:23,898 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:23,898 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:23,910 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:23,990 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:24,058 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:24,058 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:24,078 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:24,096 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:24,119 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:24,119 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:24,119 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:24,121 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:24,122 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:24,125 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:24,125 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:24,126 - mysql.connector - DEBUG - # request: b'?\xe8\x8f\x19 \xa8I\xab\xd234\x9be\xcd\x9d\x1ej0j\xaa' size: 20
+2025-05-13 16:12:24,127 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:24,128 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:24,129 - mysql.connector - DEBUG - # request: b'4\xe6\xea7\x0b\x90\x97\xe8\x10\x1fY\xd5\xc1\xeeCT\xc1\xbfG\xba' size: 20
+2025-05-13 16:12:24,131 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:24,131 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:24,131 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:24,132 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:24,132 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:24,133 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:24,133 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:24,135 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:24,135 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:24,135 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:24,135 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:24,136 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:24,136 - mysql.connector - DEBUG - # request: b"A7L\xe0'T\x1fG\xd2\xc1[\xa1=\xe4R\xa1\xbb\x1eU\xe0" size: 20
+2025-05-13 16:12:24,138 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:24,140 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:24,140 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:24,140 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:24,140 - mysql.connector - DEBUG - # request: b"%_\xaf\\\xba\x04\xf8\xf8\x92'\xc7\x00\xd9\xa1\ns\xa0a\xe3\x92" size: 20
+2025-05-13 16:12:24,144 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:24,145 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:24,149 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:24,151 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:24,159 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:24,164 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:25,921 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:25,929 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:25,975 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:26,002 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:26,002 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:26,002 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:26,007 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:26,008 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:26,008 - mysql.connector - DEBUG - # request: b'\x90B\xd8\xf0\x19\xe0\x05rs{\xba,\xbb\x8a+\x14\xad\xde\x9cT' size: 20
+2025-05-13 16:12:26,012 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:26,013 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:26,028 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:26,030 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:26,033 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:26,033 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:26,042 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:26,045 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:26,047 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:26,174 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:26,174 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:26,274 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:26,290 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:26] "GET /analytics HTTP/1.1" 200 -
+2025-05-13 16:12:26,302 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:26,305 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:26,305 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:26,310 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:26,310 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:26,310 - mysql.connector - DEBUG - # request: b'\x0e\x19Jsk\x8b\xc7\xa0\x85@V\xee\xa7#\xd1\x0b\x05\xaa\xdc\x88' size: 20
+2025-05-13 16:12:26,314 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:26,314 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:26,318 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:26] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-05-13 16:12:26,329 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:26,330 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:26,331 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:26,332 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:26,334 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:26,334 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:26,335 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:26,525 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:26,585 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:26,629 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:26,629 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:26,629 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:26,642 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:26,642 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:26,643 - mysql.connector - DEBUG - # request: b'\xe7\xf3/\x97\x1b\\R\xdf\xe8].\x02:|\xd0\x9c`\x7f\x1e>' size: 20
+2025-05-13 16:12:26,658 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:26,659 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:26,698 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:26] "GET /api/all_events HTTP/1.1" 200 -
+2025-05-13 16:12:28,707 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B71593A70>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:28,713 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:28,739 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B729C6150>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:28,739 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B729C7E60>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:28,783 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:28,783 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:28,783 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:28,828 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:28,828 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:28,838 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:28,861 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:28,861 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:28,865 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:28,865 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:28,865 - mysql.connector - DEBUG - # request: b'\xc2\xa2\xa9\xb4\x83\xc2\xd5\xc7\xf8\xb3\xb5C\xc9q\xe3c\xf5\xb2oB' size: 20
+2025-05-13 16:12:28,871 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:28,872 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:28,872 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:28,873 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:28,873 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:28,876 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:28,877 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:28,878 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:28,879 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:28,879 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:28,879 - mysql.connector - DEBUG - # request: b'\xced\t\x92?\x808p# \xc9[\xe2\xcd\xab\xa7\xfe\x92\x8b\x81' size: 20
+2025-05-13 16:12:28,881 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:28,882 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:28,882 - mysql.connector - DEBUG - # request: b'\xdc\x1eX\xec\\\xda\xa3\xe6\x8d\r\x17"\x96\x03\x02\xf6\xae\x1b\x95\xc1' size: 20
+2025-05-13 16:12:28,882 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:28,882 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:28,885 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:28,885 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:28,890 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:28,898 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:28,901 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:29,012 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AFC2C0>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:29,013 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1E3F0>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:29,013 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1F980>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:29,021 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,021 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,021 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,036 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B71591520>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,036 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B71592F00>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,045 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,045 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,130 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B701856A0>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,157 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,130 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729C7830>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,168 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,168 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,174 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,184 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,185 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,195 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,198 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,198 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,199 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,205 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,207 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,207 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,208 - mysql.connector - DEBUG - # request: b'\xd5x\x12\xf4\xe9Y\x80sq\x9d\xfe\x90\x8fZYd!P\n\x87' size: 20
+2025-05-13 16:12:29,210 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,211 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,211 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,211 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,211 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,212 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,212 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,213 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,215 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,216 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,205 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,216 - mysql.connector - DEBUG - # request: b"\x1d\xad\xab\xc4G\x1d\x15i\xbd\xa0\xe9\xd5j}\xfd/'\xd1T#" size: 20
+2025-05-13 16:12:29,216 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,217 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,217 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,217 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,218 - mysql.connector - DEBUG - # request: b'dE\xfb]\xf5g\xe9U&\x95\xfe\x0b.\xdc%\xa5\x89\xd1i\x9a' size: 20
+2025-05-13 16:12:29,219 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,219 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,222 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,222 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,230 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:29,238 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:29,242 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:29,244 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,255 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,274 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,274 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,275 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,277 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,278 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,279 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,279 - mysql.connector - DEBUG - # request: b'9\x86\xbd\x1cf\xd81\x19N\x8dV\xd1\x0b\xee\xed6\x04`\xcb\x98' size: 20
+2025-05-13 16:12:29,280 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,281 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,281 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,282 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,282 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,282 - mysql.connector - DEBUG - # request: b'l\xa1z\xce\x97\xa1&\x8d\xea@\x14\x91\x0f7\xcb\x18e\xe6\xbct' size: 20
+2025-05-13 16:12:29,283 - mysql.connector - DEBUG - # request: b'<\xec\xc2\x85\x94\xaa\x04$\x80\x8b\x1c\xd7\xe7\xf9t\xec\xec~nP' size: 20
+2025-05-13 16:12:29,283 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,287 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,287 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,287 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,287 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,287 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,288 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,289 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,292 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,293 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,293 - mysql.connector - DEBUG - # request: b'\xdf\t\x96\x02p\x9e\xb6\x84\xd4\x90\xdf}\xae\xab\xfe:(s@"' size: 20
+2025-05-13 16:12:29,296 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,296 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,302 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:29,305 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:29,308 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:29,314 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:29,334 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED65B8BC0>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,334 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED64A89E0>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,334 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1F200>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,342 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,342 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,342 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,343 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AF3E60>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:29,459 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:29,459 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,459 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,514 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,530 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,564 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,582 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,596 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,596 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,596 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:29,596 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,596 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,599 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,600 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,602 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,602 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,602 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,603 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,603 - mysql.connector - DEBUG - # request: b'>\xb8\x9c\x8d\xf7v1\xa3x\xd9\x0c\x80z&\xfa\xa1r\xc7i\x9f' size: 20
+2025-05-13 16:12:29,603 - mysql.connector - DEBUG - # request: b"\xa6\x11'\xe8\x160'D\xba\xec\xa5\xdc1\xcd\x9d\xc5\x85\xdf\x96\xa7" size: 20
+2025-05-13 16:12:29,603 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,603 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,603 - mysql.connector - DEBUG - # request: b'AKPC\x14^\xf2\x13\xf6\xcf\x81\x12\xa8\xdf\x0b\xe5L\x1e\nb' size: 20
+2025-05-13 16:12:29,606 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,607 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,608 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,608 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,609 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,609 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,611 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:29,612 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:29,612 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:29,615 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:29,615 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:29,615 - mysql.connector - DEBUG - # request: b'a0O\x81\xcf\x17\x92FI\xdb\x11?\xa0y\xc8\x87\x00u\xef\xe8' size: 20
+2025-05-13 16:12:29,620 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:29,622 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:29,627 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:29,630 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:29,632 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:29,640 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:31,324 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:31,330 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:31,423 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:31,434 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:31,434 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:31,434 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:31,438 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:31,438 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:31,438 - mysql.connector - DEBUG - # request: b'SY\xfa\xd9K\xfa\xff\xf3\xb9?\xb3&q\xcb\x0f\xd1_\xaf~\xfc' size: 20
+2025-05-13 16:12:31,441 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:31,441 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:31,456 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:31,456 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:31,459 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:31,459 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:31,460 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:31,461 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:31,462 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:31,648 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:31,648 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:31,731 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:31,745 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:31,745 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:31,746 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:31,750 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:31,751 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:31,751 - mysql.connector - DEBUG - # request: b':q\xd9+\x91\xe7%5\xd02\xf3\xcb\xef\x1b\xf9a\xd53\x0f\x9a' size: 20
+2025-05-13 16:12:31,753 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:31,754 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:31,763 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:31,769 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:31,770 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:31,770 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:31,771 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:31,774 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:31,776 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:33,909 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:33] "GET /admin HTTP/1.1" 200 -
+2025-05-13 16:12:33,983 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,034 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,047 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,047 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,047 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,047 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,047 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,047 - mysql.connector - DEBUG - # request: b'C\x81\x17|\x8f\xd2\x9b\xe6\xb6\x0c\x18\xb4\x15R\xc9C\x05\\\xb8\xc2' size: 20
+2025-05-13 16:12:34,056 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,056 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,067 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:34] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:34,151 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B715F48C0>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:34,151 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B6DCFA510>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:34,151 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B729C5400>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:34,160 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,161 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,161 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,161 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,240 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,250 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,250 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,251 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,255 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,255 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,255 - mysql.connector - DEBUG - # request: b'\xad\x806&\x90oD\xf2\xcb<\xd0\xcc)\xbdl\x8f\xa6\x13\x92\x08' size: 20
+2025-05-13 16:12:34,258 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,258 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,272 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:34] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:34,273 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,334 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,343 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,344 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,344 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,349 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,349 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,349 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,349 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,349 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,350 - mysql.connector - DEBUG - # request: b'\x80\xb2_\xfc\xcb\xb1%n\x93\x89\x00j:-\x8e\xe89\x1ea\xac' size: 20
+2025-05-13 16:12:34,353 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,353 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,362 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,362 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,362 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,362 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,362 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,363 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,363 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,363 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,363 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,369 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,369 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,369 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,369 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,369 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,370 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,370 - mysql.connector - DEBUG - # request: b'I)\xcc\xf0\x14m\xc0D\xd0N\xc2\x9e\xdd}Z\x9c\xec\xf2\x16\x03' size: 20
+2025-05-13 16:12:34,370 - mysql.connector - DEBUG - # request: b'\x1b\x17E\xd26\xe3\xa5\xf4\xe6\xebmB\xb74\xc9\x15\x0b\xdf-w' size: 20
+2025-05-13 16:12:34,371 - mysql.connector - DEBUG - # request: b'\xd0\x19\x1e4\x0f\xb30\x11\xfc\x0eA\x00|I\xach\x04!\x875' size: 20
+2025-05-13 16:12:34,373 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,373 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,374 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:34] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:34,377 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,377 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,378 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,379 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,392 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:34] "[36mGET /static/logo.png HTTP/1.1[0m" 304 -
+2025-05-13 16:12:34,392 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:34] "[35m[1mGET /static/alert.mp3 HTTP/1.1[0m" 206 -
+2025-05-13 16:12:34,423 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:34,426 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:34,429 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:34,460 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729C4080>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,460 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729C6E70>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,472 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,472 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,472 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,496 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AF2930>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:34,497 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AF3DA0>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:34,546 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729C7F50>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,546 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729C6D50>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,559 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,567 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,568 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,604 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,661 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,661 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,661 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,677 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,695 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,698 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,698 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,724 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,709 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,709 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,747 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,747 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,747 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,751 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,752 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,752 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,752 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,753 - mysql.connector - DEBUG - # request: b'\x14(\xe3\xb7\x806\xdb?\x9e`\x17\xf6\x01\xbfr\xbc\x000\x85\x81' size: 20
+2025-05-13 16:12:34,755 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,755 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,760 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,760 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,760 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,772 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AFE780>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,772 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1E570>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,774 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,776 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,776 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,790 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1FD10>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,790 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6B1EC60>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:34,791 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,792 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,792 - mysql.connector - DEBUG - # request: b'*}R\x03\xba\x1e\x19|\xe5u\x01\x1d=J\x9d\xb1\xf9\xd6x\xda' size: 20
+2025-05-13 16:12:34,806 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,807 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,807 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,807 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,807 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,808 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,808 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,813 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,813 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,813 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,813 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,823 - mysql.connector - DEBUG - # request: b'\xb0 E\x9d\x06e:.`\x9f\x92O\xed\xb3uz\x03\xe0%\x90' size: 20
+2025-05-13 16:12:34,823 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,823 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,824 - mysql.connector - DEBUG - # request: b'\xc7\xb3\xec\x85\x8c\x8b\xb7Y\xab\x03\x88m\x9ahiP\xd8+\xda6' size: 20
+2025-05-13 16:12:34,824 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,826 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,827 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,827 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,827 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,827 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,827 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,828 - mysql.connector - DEBUG - # request: b'\xa1\xfe\x0e\xa8\xbe\x18\x88\xbd\x16\xf3\xab\xb0\xd3\xfd\n\x90\x12\xca\xdc\x97' size: 20
+2025-05-13 16:12:34,830 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,830 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,830 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:34,830 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:34,830 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:34,841 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,841 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:34,842 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:34,842 - mysql.connector - DEBUG - # request: b'nD\x9b\xc3\xba"\x05\xab<\x8e\xcaM\xd7H_\xdd\xcb1F\xf1' size: 20
+2025-05-13 16:12:34,845 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:34,845 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:34,880 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:34,909 - mysql.connector - DEBUG - # request: b"o\xd2\x17ZR\xf4\xe7\xd2\x91'5A\xccC>\n2\xbb\x17\xea" size: 20
+2025-05-13 16:12:34,940 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:34,943 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:34,946 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:34,909 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:34,950 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:34,950 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:34,950 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:35,134 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:35,135 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:35,135 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:35,135 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:35,137 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:35,147 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:35,148 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:35,149 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:35,152 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:35,153 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:35,153 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:35,154 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:35,154 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:35,155 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:35,156 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:35,156 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:35,157 - mysql.connector - DEBUG - # request: b'\x98\x07\xac\x85\x16\x9a\x97\x87\x00\xfc\xe7\x83\xf4\x8f5\x9b\x15qD\x05' size: 20
+2025-05-13 16:12:35,160 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:35,161 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:35,162 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:35,162 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:35,164 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:35,165 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:35,165 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:35,166 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:35,168 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:35,168 - mysql.connector - DEBUG - # request: b"\xd1^\x18\xa7\xd1{\xba.\x9c\xcdp\x17Ja'\xb1\xfdTc\xf2" size: 20
+2025-05-13 16:12:35,170 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:35,172 - mysql.connector - DEBUG - # request: b'\xda\xc8\xc7y\xae\xe4m\xbf\xd9jl\xfc\x94Z\xec\x05pKM,' size: 20
+2025-05-13 16:12:35,173 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:35,174 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:35,177 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:35,177 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:35,178 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:35,179 - mysql.connector - DEBUG - # request: b'=\x88 n)\xdd\xc7\x80\xef\x8f\xda\x00t\x8bGh6mq\xf0' size: 20
+2025-05-13 16:12:35,180 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:35,185 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:35,186 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:35,197 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:35,204 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:35,213 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:35,216 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:35,960 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:36,008 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:36,057 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:36,058 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:36,058 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:36,058 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:36,058 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:36,058 - mysql.connector - DEBUG - # request: b'U\xd8\x0b>76\xf1\x9f\x8a%\xff\xf7\xae\xfc\x91\xef%\x00\xc9t' size: 20
+2025-05-13 16:12:36,065 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:36,065 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:36,077 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:36] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:36,314 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:36,358 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:36,407 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:36,447 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:36,622 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:36,622 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:36,622 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:36,657 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:36,657 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:36,657 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:36,657 - mysql.connector - DEBUG - # request: b'\xd5\x87~W\xf94K\xa8<\x81\x006\x88\xad\xea\xd4\x94\xf9\x80 ' size: 20
+2025-05-13 16:12:36,657 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:36,657 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:36,714 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:36,714 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:36,856 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:36,856 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:36,856 - mysql.connector - DEBUG - # request: b'\xf0\xb6B~\x8a\x80\x16\x94)\xc1s\x02\xd0\xd9L\xe3psSP' size: 20
+2025-05-13 16:12:36,864 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:36,864 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:36,961 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:37,072 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:37,074 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:37] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:37,125 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:37] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:37,191 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:37,226 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:37,247 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:37,248 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:37,248 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:37,248 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:37,291 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:37,472 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:37,472 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:37,473 - mysql.connector - DEBUG - # request: b'\x9f\x1e?,Tjf|@L\x8d\x8f\x06\x85ax\xfb\xba\xba\x07' size: 20
+2025-05-13 16:12:37,480 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:37,480 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:37,523 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:37,523 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:37,524 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:37,674 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:37,674 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:37,679 - mysql.connector - DEBUG - # request: b'y\x160\xdaY\x9a\xd8\x90\x0fmh\x12 \xbbP2\xa8\x84\xd1(' size: 20
+2025-05-13 16:12:37,745 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:37,746 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:37,750 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:37,752 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:37,755 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:37,756 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:37,756 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:37,761 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:37,764 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:37,954 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:37,955 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:37,956 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:37,958 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:37,959 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:37,962 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:37,964 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:38,294 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:38,294 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:38,367 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:38,367 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:38,504 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:38,504 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:38,504 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:38,504 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:38,507 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:38,507 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:38,565 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:38,565 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:38,565 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:38,565 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:38,565 - mysql.connector - DEBUG - # request: b'\x13\xca^\x82\xefsY\xf0\xb5\xb3\xe7\xb7@l)G\x02$\xff>' size: 20
+2025-05-13 16:12:38,565 - mysql.connector - DEBUG - # request: b't^@j\xe2\xe1\x13\xa9W\xebL\x97+\xdb{9\xaa\x8c\xcb\xf5' size: 20
+2025-05-13 16:12:38,626 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:38,626 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:38,626 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:38,626 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:38,835 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:38] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:38,835 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:38] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:38,870 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:38,910 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:39,074 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:39,074 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:39,074 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:39,179 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:39,180 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:39,180 - mysql.connector - DEBUG - # request: b'\xc5:\xeb\x0fn\x0f\x9e\xf1$[\x0c\x87\x15\x9b\x96+\x95\xe9_v' size: 20
+2025-05-13 16:12:39,214 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:39,223 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:39,444 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:39] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:40,304 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,304 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,389 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,389 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,441 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B715F7620>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:40,457 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B715CAF00>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:40,458 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B715F45F0>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:40,460 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,464 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,464 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,464 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,464 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,464 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,467 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,479 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,479 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,480 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,480 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,480 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,480 - mysql.connector - DEBUG - # request: b'\xb2\xf7\nc\xe6dH\x17s\xf7P_\x03\xac\xf4rU\x11\x07\x1e' size: 20
+2025-05-13 16:12:40,481 - mysql.connector - DEBUG - # request: b'z\x1f\xd1-\x98\xe1\xdb4\x86\xc8\xde{hL\xb7n\xfew\xfc\x9a' size: 20
+2025-05-13 16:12:40,479 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,506 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,508 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,509 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,509 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,509 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,575 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,596 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,614 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,614 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,614 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,627 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AF3380>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:40,641 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:40] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:40,641 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,641 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,642 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,642 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,642 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+P/1.1" 200 -
+2025-05-13 16:12:40,642 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,642 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,643 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,643 - mysql.connector - DEBUG - # request: b'!i\xb5\xdeWy\x8ej\x11\xae`R\x13\xe4sk\xc6~.\x1d' size: 20
+2025-05-13 16:12:40,644 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,670 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1F7A0>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:40,677 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,677 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,677 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,677 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,678 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,678 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,678 - mysql.connector - DEBUG - # request: b'\x96c_\x17\t\x7f\x84\x9b\xef\x88\xbf\xff\xd2\x04w\x148@:C' size: 20
+2025-05-13 16:12:40,678 - mysql.connector - DEBUG - # request: b'J\xcc\xf4&\x04=\x92\xba\x1dg\xb7\xed\xa4\x13[\x1e\xe9\x94]\xc6' size: 20
+2025-05-13 16:12:40,670 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6B1E360>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:40,690 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,691 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,691 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,692 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,692 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,694 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,694 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,694 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,758 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B729C71A0>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,758 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B715F78F0>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,773 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B715F6AE0>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,773 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B715F50A0>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,792 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,792 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,814 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,814 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,814 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,825 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,825 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,825 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,825 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,842 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,842 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,842 - mysql.connector - DEBUG - # request: b'@V"\x05\xe0\x1d\xaf@\x1ac\xca\x8d\\\x8d\xcb\x0c\xff\xe6\x03@' size: 20
+2025-05-13 16:12:40,847 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,847 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,847 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,847 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,847 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,851 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:40,851 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,851 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,851 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:40,852 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,852 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:40,854 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,854 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,855 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:40,855 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,855 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,856 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:40,856 - mysql.connector - DEBUG - # request: b'\xa6\x8f\x99\xce\xa3\x9e8%q\xa9\xa5okI\xb4\x8d\x98E\xa7\xdb' size: 20
+2025-05-13 16:12:40,856 - mysql.connector - DEBUG - # request: b'=\x9c:.\xd7a\xc2Q\n\x01D&x\xc6b\x05Q\xa9\xc6\r' size: 20
+2025-05-13 16:12:40,856 - mysql.connector - DEBUG - # request: b'\xa5\xafZP\xb7q[u\xcaLW3Y\xbf\xd2\xa4\xcd\xae\xaa\x1b' size: 20
+2025-05-13 16:12:40,860 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,860 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,814 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:40,861 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,861 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:40,861 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,861 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:40,890 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:40] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:40,923 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:40,861 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:40,944 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:40,948 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:40,938 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:40,959 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED5D0E1B0>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,974 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AF3740>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,975 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED65E19D0>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,977 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AF24E0>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:40,939 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,956 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:40,981 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:40,981 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:41,023 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:41,023 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:41,024 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:41,024 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:41,034 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:41,048 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,048 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,054 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,054 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,054 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,054 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,055 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,055 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,055 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,055 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,056 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,056 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,057 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,057 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,057 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,058 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,058 - mysql.connector - DEBUG - # request: b'\xf1\xf6R@\x90\xc9\xc5\xe80\x9d{\xa51\xdc\xfab\xc4\xfe\x98\x90' size: 20
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # request: b'\x86\xf3\x17\x05\xd5\xcb\x82\x87\xb4Z\xeb\xa0]\x0fZb\xda\x19\xfb\xde' size: 20
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # request: b'\xad\xbc\xc1\xe6\xe8\x1c\xcd\x05\x05\x15E\xfd1\xfe\xf32s\r#\x16' size: 20
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # request: b'bf\xd4\xdb\x15\x97S\xba\xb8 \x14\x85\xe4Z8\x9e\xb7\x1c\x84>' size: 20
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,059 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,064 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,064 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,157 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:41,162 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:41,167 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:41,172 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:41,184 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:41,229 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:41,259 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:41,261 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,261 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,262 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,262 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,261 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:41,262 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,262 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,262 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,262 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:41,262 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:41,263 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,263 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,264 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:41,264 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,264 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - # request: b'\x16)\x01Y\x8b\x107A\xe9\x87\xb7(\xba\xf5\x01\xb5v.\xfe\n' size: 20
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - # request: b'\x85Cq>\xa0g\xb0\x02ZZM\xfd\x80J\xe2QY\x18:v' size: 20
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:41,267 - mysql.connector - DEBUG - # request: b'9\xdb\xe4\xe9\xdc\xa8Q\x00\xd3\xfaT\x12uN\xec\x9dN\xee-\xd3' size: 20
+2025-05-13 16:12:41,269 - mysql.connector - DEBUG - # request: b'\x17\xecXW\x83\x17\xc0v\x95\xc21\xd3\x0b\xaaz$\xbcd\xe5\x8a' size: 20
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,284 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,289 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:41,505 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:41,536 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:41,541 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:41,572 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:42,355 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:42,355 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:42,444 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:42,446 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:42,573 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:42,574 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:42,574 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:42,688 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:42,688 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:42,689 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:42,725 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:42,726 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:42,726 - mysql.connector - DEBUG - # request: b'\xd8\xee#C\x9eV\x92\x1c\x897C\x82G\x83\x8f\xdfM\xb1\xaa\xcd' size: 20
+2025-05-13 16:12:42,924 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:42,924 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:42,924 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:42,924 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:42,924 - mysql.connector - DEBUG - # request: b'\xb8h\x07\x19\x82\xe2\x8c\xa4\xa5G\xdc\xa7\xdc\xdc\xfc\xae\xec\xa32\xad' size: 20
+2025-05-13 16:12:42,964 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:42,964 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:43,270 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:43,342 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:43] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:43,377 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:43,380 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:43] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:43,425 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:43,554 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:43,584 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:43,584 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:43,584 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:43,608 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:43,638 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:43,735 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:43,770 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:43,774 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:43,775 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:43,775 - mysql.connector - DEBUG - # request: b'\x1d\x04G\x8f\xb9X\xa7A\n\x8c\xb1\xd4\x03\r\x0f\xe3\xae\xd1\xb37' size: 20
+2025-05-13 16:12:43,775 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:43,775 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:43,775 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:43,790 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:43,790 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:43,800 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:43,800 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:43,800 - mysql.connector - DEBUG - # request: b'\xfe\x8d<\xad\x8b\x9e\xf4)[\xec\xc36}\xf4\x1f3\xb3L\x99\x0e' size: 20
+2025-05-13 16:12:43,954 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:43,954 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:43,954 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:43,954 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:43,954 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:44,106 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:44,106 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:44,106 - mysql.connector - DEBUG - # request: b"K\xa2\x1e\x8a\xa1$\xc4\xeb'\x1e\xb9\x8c?\xd7\xb0\xa2\x1d\xee\xda\xb3" size: 20
+2025-05-13 16:12:44,106 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:44,114 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:44,114 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:44,114 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:44,114 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:44,118 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:44,119 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:44,119 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:44,120 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:44,145 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:44] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:44,186 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.21.34:8000
+2025-05-13 16:12:44,187 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 10.110.23.135:8000
+2025-05-13 16:12:44,188 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 132:8000
+2025-05-13 16:12:44,191 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.101:8000
+2025-05-13 16:12:44,195 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 192.168.1.102:8000
+2025-05-13 16:12:44,196 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 4:8000
+2025-05-13 16:12:44,197 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): 5:8000
+2025-05-13 16:12:44,339 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:44,339 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:44,494 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:44,494 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:44,534 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:44,534 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:44,534 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:44,534 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:44,540 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:44,540 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:44,541 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:44,541 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:44,541 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:44,541 - mysql.connector - DEBUG - # request: b'\xb4C\xcabJT\xef\xec \x10\xc5tZ\xe0\xb5\xb4\x08\xc3,\xe8' size: 20
+2025-05-13 16:12:44,541 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:44,541 - mysql.connector - DEBUG - # request: b'm\xb7\xdd\x1cD\x9d\x81\xe6OZ\xfe\xd5\x06\x12>x9\t\x8e&' size: 20
+2025-05-13 16:12:44,544 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:44,544 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:44,544 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:44,544 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:44,557 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:44] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:44,561 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:44] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:44,884 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:44,987 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:45,014 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:45,014 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:45,014 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:45,019 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:45,019 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:45,019 - mysql.connector - DEBUG - # request: b'\xf6JO$C#\xcfo\xe6z?\x92\x9e\xa5\xcd\xb8\xfbI\xc9\xfb' size: 20
+2025-05-13 16:12:45,028 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:45,028 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:45,047 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:45] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:46,260 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:46,281 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:46,342 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:46,358 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:46,358 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:46,358 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:46,358 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:46,358 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:46,358 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:46,373 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:46,376 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:46,376 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:46,376 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:46,376 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:46,377 - mysql.connector - DEBUG - # request: b'\x1d\x92Y\xd6`\xe6\xaag=\xef\x08\xc8\xa9=)MY3&]' size: 20
+2025-05-13 16:12:46,378 - mysql.connector - DEBUG - # request: b'\x13\xe2\xfbCR\xd7\x19^\xeb\xd7\xa3L\xeb\xd0\xcc\x90\xb7wj!' size: 20
+2025-05-13 16:12:46,379 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:46,379 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:46,379 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:46,379 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:46,393 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:46] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:46,394 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:46] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:46,523 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:46,609 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:46,617 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:46,617 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:46,617 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:46,621 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:46,622 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:46,622 - mysql.connector - DEBUG - # request: b'\x9c\x1f\xcbOI\x1d\x9c\x93\xd0^.\xbf!\x1aa\x02\xd2\xd3\x04\x93' size: 20
+2025-05-13 16:12:46,624 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:46,624 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:46,630 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:46] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:46,849 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B7162D0D0>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:46,849 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B7162FD10>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:46,849 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x0000020B7162FC20>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:46,849 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:46,849 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:46,849 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:46,972 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:46,988 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,007 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,017 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,017 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,017 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,017 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,017 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,023 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,024 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,024 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,024 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,027 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,027 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,027 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,027 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,027 - mysql.connector - DEBUG - # request: b'}\x1a\xc3]\xfb\x12j\xfd\xd6w]V;\xd3\xd50Js8\xe3' size: 20
+2025-05-13 16:12:47,028 - mysql.connector - DEBUG - # request: b'\xdc\x03\x04\n\xaf8*{\xde\xb2y^\x8aZ\x81/\xdf5\xabI' size: 20
+2025-05-13 16:12:47,029 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,030 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,030 - mysql.connector - DEBUG - # request: b'\xee|\xc5\x12\xe5\xca\x18\xfd\xd8\x88\x14\xc4]P\xec\xb0o\xa8`n' size: 20
+2025-05-13 16:12:47,030 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,030 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,030 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,032 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,032 - __main__ - ERROR - Error pinging Machine7 at 132: HTTPConnectionPool(host='132', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED6AF00B0>: Failed to resolve '132' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:47,032 - __main__ - ERROR - Error pinging Machine4 at 4: HTTPConnectionPool(host='4', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED65E3C50>: Failed to resolve '4' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:47,032 - __main__ - ERROR - Error pinging Machine6 at 5: HTTPConnectionPool(host='5', port=8000): Max retries exceeded with url: /status (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x000001CED65E3260>: Failed to resolve '5' ([Errno 11001] getaddrinfo failed)"))
+2025-05-13 16:12:47,033 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,033 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,033 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,033 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,033 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,044 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:47,049 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:47,052 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:47,122 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B7162FE30>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,122 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B715C9FD0>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,122 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B715F6090>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,123 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000020B7162C0B0>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,124 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,124 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,124 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,124 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,141 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,148 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,148 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,163 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,163 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,163 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,165 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,165 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,165 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,165 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,165 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,166 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,167 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,167 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,168 - mysql.connector - DEBUG - # request: b'\xfd\xb6p\xa0y\xe9\x91c\tIcu9\xde\xf6v\xc1$E\xaf' size: 20
+2025-05-13 16:12:47,168 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,169 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,169 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,169 - mysql.connector - DEBUG - # request: b'\xa8\xb77\x04.o\xa3\xb9\xe9\x8e\x0c\xc1\xe8\x0c\xb7\xc7\xec\xe0\xc7f' size: 20
+2025-05-13 16:12:47,170 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,170 - mysql.connector - DEBUG - # request: b'\x80?\xa9\x96 ,\x9b\xc5j_\xab\xd2]\xe0\xde\xc9R\xac\xb8\xa7' size: 20
+2025-05-13 16:12:47,170 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,170 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,171 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,171 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,171 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,171 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,176 - __main__ - INFO - Status updated for Machine6 to offline
+2025-05-13 16:12:47,189 - __main__ - ERROR - Error pinging Machine1 at 10.110.21.34: HTTPConnectionPool(host='10.110.21.34', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED65E1550>, 'Connection to 10.110.21.34 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,190 - __main__ - INFO - Status updated for Machine7 to offline
+2025-05-13 16:12:47,193 - __main__ - INFO - Status updated for Machine4 to offline
+2025-05-13 16:12:47,195 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,210 - __main__ - ERROR - Error pinging Machine3 at 192.168.1.102: HTTPConnectionPool(host='192.168.1.102', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED65E0DA0>, 'Connection to 192.168.1.102 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,221 - __main__ - ERROR - Error pinging Machine2 at 192.168.1.101: HTTPConnectionPool(host='192.168.1.101', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AF1C70>, 'Connection to 192.168.1.101 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,225 - __main__ - ERROR - Error pinging Machine8 at 10.110.23.135: HTTPConnectionPool(host='10.110.23.135', port=8000): Max retries exceeded with url: /status (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CED6AF0F50>, 'Connection to 10.110.23.135 timed out. (connect timeout=3)'))
+2025-05-13 16:12:47,237 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,240 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,263 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,263 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,263 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,275 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,295 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,314 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,314 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,314 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,314 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,317 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,325 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,325 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,325 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,328 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,328 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,328 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,329 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,329 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,329 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,329 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - # request: b'\xb6w\xa1\xf8J\xc8\xa3n\xda{\x85\x8b\x9fNs1\xa4Y\xea\xaa' size: 20
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - # request: b'\xa1*\x86\x9bf\x90\xbb\xaa\x92\x05\xed\xbb\xf0%\xb2\x0e\xee\xda\xfb\x1b' size: 20
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,330 - mysql.connector - DEBUG - # request: b'\xa7\x01\x88S\xf0\xc0\xb0\x89-\xaa\x16\xd6\x0b\xaa\xe0\x90}\x9f\xba\xa7' size: 20
+2025-05-13 16:12:47,335 - mysql.connector - DEBUG - # request: b'\x8f\xa1A#\xba\xcb\xd4\xcd2\xc5\x06\xd2\xdb\x08\xe1:\xc6\xdf\x12\xd2' size: 20
+2025-05-13 16:12:47,335 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,337 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,337 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,338 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,338 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,347 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:47,352 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:47,354 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:47,356 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:47,380 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,380 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:47,381 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,381 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,381 - mysql.connector - DEBUG - # request: b'dN\x88\xc5\xa0d\x89@\xbb\x05Gb\xb7+\xad\xe9G\x8e\xfe\x85' size: 20
+2025-05-13 16:12:47,381 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,381 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,391 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,391 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,392 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,392 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,392 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,393 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,394 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:47,394 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:47,394 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:47,396 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,396 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,396 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,397 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,397 - mysql.connector - DEBUG - # request: b'\x91\r\xf2\xbb\x15\x04\x0b\x97\x8e\xea\x90-\xa0*/R\xba\xbb\x13r' size: 20
+2025-05-13 16:12:47,397 - mysql.connector - DEBUG - # request: b'*OU\x07wJj\x0f\xbag\x897\x9f\x14DT~\xe2\x8e_' size: 20
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - # request: b'g\xaa\x82\xd0\xf3\xcd\xb7\xded\x9f\xc9\xd7\x0b\x03\x90\xaf\x1cD\xfdQ' size: 20
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:47,400 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:47,409 - __main__ - INFO - Status updated for Machine1 to offline
+2025-05-13 16:12:47,412 - __main__ - INFO - Status updated for Machine3 to offline
+2025-05-13 16:12:47,422 - __main__ - INFO - Status updated for Machine2 to offline
+2025-05-13 16:12:47,426 - __main__ - INFO - Status updated for Machine8 to offline
+2025-05-13 16:12:47,948 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:47,991 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:48,029 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:48,029 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:48,029 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:48,041 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:48,041 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:48,042 - mysql.connector - DEBUG - # request: b'\xd5E\x15\xf0k\x99\xe0\xfc7|v.z\xafn\xea\xdcFQc' size: 20
+2025-05-13 16:12:48,043 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:48,043 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:48,062 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:48] "GET /api/available_machines HTTP/1.1" 200 -
+2025-05-13 16:12:48,252 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:48,328 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:48,339 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:48,340 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:48,341 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:48,345 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:48,345 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:48,345 - mysql.connector - DEBUG - # request: b'\xa9\x88I\xeeG7\xf5}\xf5P\x85\x90\x15\x8c\xb4\xc2\xacI\t\x18' size: 20
+2025-05-13 16:12:48,348 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:48,348 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:48,363 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:48] "GET /api/recent_events HTTP/1.1" 200 -
+2025-05-13 16:12:48,380 - mysql.connector - DEBUG - Building SSL context
+2025-05-13 16:12:48,460 - mysql.connector - DEBUG - Switching to SSL
+2025-05-13 16:12:48,475 - mysql.connector - DEBUG - SSL has been enabled
+2025-05-13 16:12:48,475 - mysql.connector - DEBUG - Starting authorization phase
+2025-05-13 16:12:48,475 - mysql.connector - DEBUG - The provided initial strategy is caching_sha2_password
+2025-05-13 16:12:48,478 - mysql.connector - DEBUG - Server's response is an auth switch request
+2025-05-13 16:12:48,478 - mysql.connector - DEBUG - Switching to strategy mysql_native_password
+2025-05-13 16:12:48,478 - mysql.connector - DEBUG - # request: b'\xf2\xa8\xe1\xbc\xb8\x99\xdb\x8c\x00Y\xe0\x15\xd0\x0f?\x98\xecJ\xd6\xa2' size: 20
+2025-05-13 16:12:48,478 - mysql.connector - DEBUG - # server response packet: b'\x07\x00\x00\x05\x00\x00\x00\x02\x00\x00\x00'
+2025-05-13 16:12:48,478 - mysql.connector - DEBUG - mysql_native_password completed succesfully
+2025-05-13 16:12:48,493 - werkzeug - INFO - 127.0.0.1 - - [13/May/2025 16:12:48] "GET /api/preventive_maintenance HTTP/1.1" 200 -
+2025-05-13 16:12:49,364 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:49,365 - __main__ - ERROR - Database error pinging Raspberry Pis: 2003: Can't connect to MySQL server on '10.110.3.102:3306' (10065 Une opération a été tentée sur un hôte impossible à atteindre)
+2025-05-13 16:12:49,444 - schedule - DEBUG - Running job Job(interval=2, unit=seconds, do=ping_raspberry, args=(), kwargs={})
+2025-05-13 16:12:49,444 - __main__ - ERROR - Database error pinging Raspberry Pis: 2003: Can't connect to MySQL server on '10.110.3.102:3306' (10065 Une opération a été tentée sur un hôte impossible à atteindre)
